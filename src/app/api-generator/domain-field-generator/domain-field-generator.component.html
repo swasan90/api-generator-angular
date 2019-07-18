@@ -1,0 +1,31 @@
+<mat-step [stepControl]="domainFieldsFormGroup" [editable]="isEditable">
+  <form [formGroup]="domainFieldsFormGroup" class="parent">
+    <ng-template matStepLabel>Add your domain fields</ng-template>
+    <p class="mat-para">Add your field name and field data type</p>
+    <div formArrayName="fieldControls">
+      <div *ngFor="let item of domainFieldsFormGroup.get('fieldControls').controls; let i=index;">
+        <div [formGroupName]="i">
+          <mat-form-field class="mat-label">
+            <input matInput placeholder="Field Name" formControlName="fieldNameCtrl" required autocomplete="off">
+          </mat-form-field>
+
+          <mat-form-field class="mat-label">
+            <mat-select formControlName="fieldTypeCtrl">
+              <mat-option *ngFor="let fieldType of fieldTypes" [value]="fieldType.value">
+                {{fieldType.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-mini-fab color="primary" (click)="add()"><strong>+</strong></button>
+        </div>
+        Chosen name :{{domainFieldsFormGroup.controls.fieldControls.controls[i].controls.fieldNameCtrl.value}}
+        Chosen type :{{domainFieldsFormGroup.controls.fieldControls.controls[i].controls.fieldTypeCtrl.value}}
+      </div>
+    </div>
+    <div>
+      <button mat-raised-button matStepperPrevious>Back</button>
+      <div class="divider"></div>
+      <button mat-raised-button color="accent" matStepperNext (click)="submitDomainFields()">Next</button>
+    </div>
+  </form>
+</mat-step>

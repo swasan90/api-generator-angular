@@ -1,0 +1,20 @@
+<form [formGroup]="projectFormGroup" class="parent">
+  <ng-template matStepLabel>Create Project & Domain</ng-template>
+  <div>
+    <label class="mat-label">Project Name : </label>
+    <mat-form-field>
+      <input matInput placeholder="Project name" formControlName="projectCtrl" required autocomplete="off">
+    </mat-form-field>
+  </div>
+  <div>
+    <label class="mat-label">Domain Name : </label>
+    <mat-form-field>
+      <input matInput placeholder="Domain name" formControlName="domainCtrl" required autocomplete="off">
+    </mat-form-field>
+  </div>
+  <div>
+    <button mat-raised-button color="accent" matStepperNext (click)="submitProject()">Next</button>
+
+  </div>
+</form>
+<router-outlet></router-outlet>
