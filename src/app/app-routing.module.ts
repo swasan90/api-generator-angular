@@ -5,24 +5,35 @@ import { Routes, RouterModule } from '@angular/router';
 //Importing components
 
 import { FullLayoutComponent } from './layout/full-layout/full-layout.component';
+import { ApiGeneratorComponent } from './api-generator/api-generator.component';
 
 
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth/login',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   },
   {
-    path: 'home',
+    path: 'dashboard',
     component: FullLayoutComponent,
     data: {
       title: 'Home',
     }
+  },
+  {
+    path: 'api',
+    component: FullLayoutComponent,
+    children: [
+      {
+        path: 'create_api',
+        component: ApiGeneratorComponent
+      }
+    ]
 
   }
-]
+];
 
 @NgModule({
   declarations: [],
