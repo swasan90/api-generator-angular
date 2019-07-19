@@ -13,7 +13,7 @@ export class DomainFieldGeneratorComponent implements OnInit {
   domainFieldsFormGroup: FormGroup;
   isEditable = false;
 
-  fieldControls: FormArray;
+ 
 
   fieldTypes: FieldType[] = [
     { value: "number", viewValue: "Number" },
@@ -34,12 +34,14 @@ export class DomainFieldGeneratorComponent implements OnInit {
   }
 
   add() {
-    console.log("clicked add");    
-    this.fieldControls = this.domainFieldsFormGroup.get('fieldControls') as FormArray;
+    console.log("clicked add");         
     this.fieldControls.push(this.createFieldControls());
 
   }
 
+  get fieldControls():FormArray{
+    return this.domainFieldsFormGroup.get('fieldControls') as FormArray;
+  }
   
 
   submitDomainFields() {
