@@ -1,5 +1,5 @@
-<form [formGroup]="projectFormGroup" class="parent">
-  <ng-template matStepLabel>Create Project & Domain</ng-template>
+<!-- Step:1 Create project and domain name -->
+<div [formGroup]="projectForm">
   <div>
     <label class="mat-label">Project Name : </label>
     <mat-form-field>
@@ -14,7 +14,5 @@
   </div>
   <div>
     <button mat-raised-button color="accent" matStepperNext (click)="submitProject()">Next</button>
-
   </div>
-</form>
-<router-outlet></router-outlet>
+</div>
