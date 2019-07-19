@@ -24,7 +24,10 @@ export class ApiGeneratorComponent implements OnInit {
       fieldTypeCtrl: ['', Validators.required],
     });
   }
-
+  
+  onNotify(formGroup: FormGroup){
+    this.projectFormGroup= formGroup;
+  }
   ngOnInit() { 
     this.projectFormGroup = this._formBuilder.group({
       projectCtrl: ['', Validators.required],

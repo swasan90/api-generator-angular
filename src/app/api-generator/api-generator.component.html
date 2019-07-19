@@ -9,18 +9,17 @@
   </mat-step> 
 
   <!-- Step:2 Create Field names and field types for the created domain -->
-    <mat-step [stepControl]="domainFieldsFormGroup" [editable]="isEditable">
+    <mat-step [stepControl]="domainFieldsFormGroup" [editable]="isEditable" >
     <form *ngIf="domainFieldsFormGroup" [formGroup]="domainFieldsFormGroup" class="parent">
       <ng-template matStepLabel>Add your domain fields</ng-template>
-        <app-domain-field-generator [domainFieldsForm]="domainFieldsFormGroup"></app-domain-field-generator>
+        <app-domain-field-generator (notify)='onNotify($event)'[domainFieldsForm]="domainFieldsFormGroup"></app-domain-field-generator>
     </form>
   </mat-step> 
 
   <!-- Step:3 Status of the step- provides you the api endpoint list -->
    <mat-step [editable]="!isEditable">       
       <ng-template matStepLabel>Status</ng-template>
-          <!-- <app-api-list-generator></app-api-list-generator>  -->
-        <app-domain-field-generator [domainFieldsForm]="domainFieldsFormGroup"></app-domain-field-generator>     
+          <app-api-list-generator></app-api-list-generator> 
   </mat-step>  
   
 </mat-horizontal-stepper>
