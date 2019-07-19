@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { FieldType } from 'src/app/model/fieldType';
@@ -24,6 +24,8 @@ export class DomainFieldGeneratorComponent implements OnInit {
 
   @Input() domainFieldsForm: FormGroup;
 
+  @Output() notify:EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+
   createFieldControls(): FormGroup {
     return this._formBuilder.group({
       fieldNameCtrl: ['', Validators.required],
@@ -41,7 +43,9 @@ export class DomainFieldGeneratorComponent implements OnInit {
   
 
   submitDomainFields() {
-    
+    console.log(this.fieldControls);
+    console.log(this.domainFieldsFormGroup);
+    this.notify.emit(this.domainFieldsFormGroup);
   }
 
 
