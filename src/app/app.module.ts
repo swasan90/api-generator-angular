@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
 //Angular Material modules
-import {CdkStepperModule} from '@angular/cdk/stepper';
+import {CdkStepperModule, STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { MatStepperModule,
          MatFormFieldModule,
          MatInputModule,
@@ -53,7 +53,11 @@ import { ApiListGeneratorComponent } from './api-generator/api-list-generator/ap
     MatTableModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    {
+    provide: STEPPER_GLOBAL_OPTIONS,
+    useValue: { showError: true }
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
