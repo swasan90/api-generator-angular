@@ -1,45 +1,41 @@
-<mat-step>
-  <ng-template matStepLabel>Status</ng-template>
-  <div class="parent">
-    <!-- <p class="mat-label">Successfully created API for the domain employees.</p>        -->
-    <div>
-      <label class="mat-label">Project:</label>
-      <label class="mat-text">Geoscience</label>
+<div  class="parent">
+  <div>
+    <label class="mat-label">Project:</label>
+    <label class="mat-text">Geoscience</label>
 
-      <label class="mat-label">Project Id:</label>
-      <label class="mat-text">ec9164b0-a7ed-11e9-bf1f-d51928148523</label>
+    <label class="mat-label">Project Id:</label>
+    <label class="mat-text">ec9164b0-a7ed-11e9-bf1f-d51928148523</label>
 
-      <label class="mat-label">Domain:</label>
-      <label class="mat-text">employees</label>
-    </div>
-    <div>
-      <mat-table [dataSource]="API_DATA" class="mat-elevation-z8">
-        <!-- Name Column -->
-        <ng-container matColumnDef="endpoint_name">
-          <th mat-header-cell *matHeaderCellDef> Endpoint Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.endpoint_name}} </td>
-        </ng-container>
-
-        <!-- Weight Column -->
-        <ng-container matColumnDef="endpoint_url">
-          <th mat-header-cell *matHeaderCellDef> Endpoint Url </th>
-          <td mat-cell *matCellDef="let element"> {{element.endpoint_url}} </td>
-        </ng-container>
-
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="method_type">
-          <th mat-header-cell *matHeaderCellDef> Method Type </th>
-          <td mat-cell *matCellDef="let element"> {{element.method_type}} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </mat-table>
-    </div>
+    <label class="mat-label">Domain:</label>
+    <label class="mat-text">employees</label>
   </div>
   <div>
-    <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-    <div class="divider"></div>
-    <button mat-raised-button (click)="stepper.reset()">Reset</button>
+    <mat-table [dataSource]="API_DATA" class="mat-elevation-z8">
+      <!-- Endpoint name column -->
+      <ng-container matColumnDef="endpoint_name">
+        <th mat-header-cell *matHeaderCellDef> Endpoint Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.endpoint_name}} </td>
+      </ng-container>
+
+      <!-- Endpint Url Column -->
+      <ng-container matColumnDef="endpoint_url">
+        <th mat-header-cell *matHeaderCellDef> Endpoint Url </th>
+        <td mat-cell *matCellDef="let element"> {{element.endpoint_url}} </td>
+      </ng-container>
+
+      <!-- Method type Column -->
+      <ng-container matColumnDef="method_type">
+        <th mat-header-cell *matHeaderCellDef> Method Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.method_type}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </mat-table>
   </div>
-</mat-step>
+</div>
+<div>
+  <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+  <div class="divider"></div>
+  <button mat-raised-button (click)="stepper.reset()">Reset</button>
+</div>
