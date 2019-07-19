@@ -14,14 +14,14 @@ export class ProjectGeneratorComponent implements OnInit {
   @Input() projectForm:FormGroup;
   
   submitProject() {
-
+    console.log(this.projectFormGroup);
   }
 
   ngOnInit() {
-    // this.projectFormGroup = this._formBuilder.group({
-    //   projectCtrl: ['', Validators.required],
-    //   domainCtrl: ['', Validators.required]
-    // });
+    this.projectFormGroup = this._formBuilder.group({
+      projectCtrl: ['', Validators.required],
+      domainCtrl: ['', Validators.required]
+    });
   }
 
 }
