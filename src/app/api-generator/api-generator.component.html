@@ -1,18 +1,18 @@
 <h4>Create your API</h4>
 <mat-horizontal-stepper linear labelPosition="bottom" #stepper>
   <!-- Step:1 Create project and domain name -->
-   <mat-step [stepControl]="projectFormGroup" [editable]="isEditable">
-    <form *ngIf="projectFormGroup" [formGroup]="projectFormGroup" class="parent">
+   <mat-step [stepControl]="projectDomainGenerator" [editable]="isEditable">
+    <form [formGroup]="projectDomainGenerator" class="parent">
       <ng-template matStepLabel>Create Project & Domain</ng-template>
-      <app-project-generator [projectForm]="projectFormGroup"></app-project-generator>
+      <app-project-generator formControlName = "projectInfo"></app-project-generator>
     </form>
   </mat-step> 
 
   <!-- Step:2 Create Field names and field types for the created domain -->
-    <mat-step [stepControl]="domainFieldsFormGroup" [editable]="isEditable" >
-    <form *ngIf="domainFieldsFormGroup" [formGroup]="domainFieldsFormGroup" class="parent">
+    <mat-step [stepControl]="domainFieldGenerator" [editable]="isEditable" >
+    <form  [formGroup]="domainFieldGenerator" class="parent">
       <ng-template matStepLabel>Add your domain fields</ng-template>
-        <app-domain-field-generator [domainFieldsForm]="domainFieldsFormGroup"></app-domain-field-generator>
+        <app-domain-field-generator formControlName="domainFieldInfo"></app-domain-field-generator>
     </form>
   </mat-step> 
 

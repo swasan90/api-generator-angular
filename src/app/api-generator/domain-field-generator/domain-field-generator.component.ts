@@ -1,61 +1,81 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+ 
+import { Component, OnInit, forwardRef } from '@angular/core';
 
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FieldType } from 'src/app/model/fieldType';
-
 @Component({
   selector: 'app-domain-field-generator',
   templateUrl: './domain-field-generator.component.html',
-  styleUrls: ['../api-generator.component.css']
+  styleUrls: ['../api-generator.component.css'],
+  providers:[
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DomainFieldGeneratorComponent),
+      multi: true
+    }
+  ]
 })
-export class DomainFieldGeneratorComponent implements OnInit {
-
-  domainFieldsFormGroup: FormGroup;
-  isEditable = false;
-
- 
+export class DomainFieldGeneratorComponent implements OnInit,ControlValueAccessor {
+  
+  isEditable = false; 
+  domainFieldsForm:FormGroup;
 
   fieldTypes: FieldType[] = [
     { value: "number", viewValue: "Number" },
     { value: "text", viewValue: "Text" },
     { value: "boolean", viewValue: "Boolean" }
   ];
-  constructor(private _formBuilder: FormBuilder) { }
+ 
 
-  @Input() domainFieldsForm: FormGroup;
+  constructor(private _fb:FormBuilder) { }  
 
-  @Output() notify:EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+  public onTouched: () => void = () => {};
 
-  createFieldControls(): FormGroup {
-    return this._formBuilder.group({
-      fieldNameCtrl: ['', Validators.required],
-      fieldTypeCtrl: ['', Validators.required],
+  //Overriding control value accessor methods
+  writeValue(obj: any): void {
+    obj && this.domainFieldsForm.setValue(obj,{emitEvent:false});
+  }
+  registerOnChange(fn: any): void {
+    console.log("on change");
+    this.domainFieldsForm.valueChanges.subscribe(fn);
+  }
+  registerOnTouched(fn: any): void {
+    console.log("on blur");
+    this.onTouched = fn;
+  }
+  setDisabledState?(isDisabled: boolean): void {
+    isDisabled ? this.domainFieldsForm.disable():this.domainFieldsForm.enable();
+  }
+
+  submitDomainFields() {
+    console.log(this.domainFieldsForm.value);
+  }
+
+  createAttributeGroups(){
+    return this._fb.group({
+        fieldNameCtrl :new FormControl("",[Validators.required]),
+        fieldTypeCtrl :new FormControl("",[Validators.required])  
     });
   }
 
   add() {
-    console.log("clicked add");         
-    this.fieldControls.push(this.createFieldControls());
-
+    console.log("clicked add"); 
+    (<FormArray>this.domainFieldsForm.get('attributes')).push(this.createAttributeGroups());  
   }
 
-  get fieldControls():FormArray{
-    return this.domainFieldsFormGroup.get('fieldControls') as FormArray;
+  get attributes():FormArray{
+    return this.domainFieldsForm.get('attributes') as FormArray;
   }
-  
-
-  submitDomainFields() {
-    console.log(this.fieldControls);
-    console.log(this.domainFieldsFormGroup);
-    this.notify.emit(this.domainFieldsFormGroup);
-  }
-
-
+   
 
   ngOnInit() {
-    this.domainFieldsFormGroup = this._formBuilder.group({
-      fieldControls: this._formBuilder.array([this.createFieldControls()])
-    });   
+    console.log("in ngonit");    
+    this.domainFieldsForm = this._fb.group({
+      attributes: this._fb.array([
+        this.createAttributeGroups()
+      ])
+  });
+  console.log(this.domainFieldsForm.value);
 
   }
 

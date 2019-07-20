@@ -1,6 +1,6 @@
 import { Fields } from './../model/fields';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { FieldType } from '../model/fieldType';
 import { ApiEndPoints } from '../model/api-endpoints';
 
@@ -10,33 +10,29 @@ import { ApiEndPoints } from '../model/api-endpoints';
   styleUrls: ['./api-generator.component.css']
 })
 
-
+ 
 export class ApiGeneratorComponent implements OnInit {
-  projectFormGroup: FormGroup;
-  domainFieldsFormGroup: FormGroup;
+  domainFieldGenerator:FormGroup;
+  projectDomainGenerator:FormGroup;
   isEditable = false;
 
-  constructor(private _formBuilder: FormBuilder) { }
+  // public projectDomainGenerator:FormGroup = new FormGroup({
+  //   projectInfo:new FormControl("")    
+  // })
 
-  createFieldControls(): FormGroup {
-    return this._formBuilder.group({
-      fieldNameCtrl: ['', Validators.required],
-      fieldTypeCtrl: ['', Validators.required],
-    });
-  }
-  
-  onNotify(formGroup: FormGroup){
-    this.projectFormGroup= formGroup;
-  }
-  ngOnInit() { 
-    this.projectFormGroup = this._formBuilder.group({
-      projectCtrl: ['', Validators.required],
-      domainCtrl: ['', Validators.required]
-    });
-    this.domainFieldsFormGroup = this._formBuilder.group({
-      fieldControls: this._formBuilder.array([this.createFieldControls()])
-    });   
+  // public DomainFieldGenerator:FormGroup = new FormGroup({
+  //   domainFieldInfo:new FormArray([])
+    
+  // })
+  constructor(private _fb:FormBuilder) { }
 
+  ngOnInit() {
+    this.projectDomainGenerator = this._fb.group({
+        projectInfo:new FormControl("") 
+    })
+    this.domainFieldGenerator = this._fb.group({
+      domainFieldInfo:new FormControl("") 
+    });
   }
 
 }

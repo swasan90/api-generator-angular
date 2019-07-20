@@ -8,10 +8,10 @@
     <label class="mat-label">Domain:</label>
     <label class="mat-text">employees</label>
   </div>
-  <div formArrayName="fieldControls">
-    <div *ngFor="let item of domainFieldsFormGroup.get('fieldControls').controls; let i=index" [formGroup]="item">
+  <div formArrayName="attributes">
+    <div *ngFor="let item of attributes.controls[i]; let i=index;"  [formGroup]="item">
       <!-- Form control for the field name -->
-      <div>
+      <div>               
         <mat-form-field class="mat-label">
           <input matInput placeholder="Field Name" formControlName="fieldNameCtrl" required autocomplete="off">
         </mat-form-field>
@@ -25,8 +25,8 @@
         </mat-form-field>
         <button mat-mini-fab color="primary" (click)="add()"><strong>+</strong></button>
       </div>
-      <!-- Chosen name :{{domainFieldsFormGroup.controls.fieldControls.controls[i].controls.fieldNameCtrl.value}}
-            Chosen type :{{domainFieldsFormGroup.controls.fieldControls.controls[i].controls.fieldTypeCtrl.value}} -->
+      Chosen name :{{domainFieldsForm.controls.attributes.controls[i].controls.fieldNameCtrl.value}}
+      Chosen type :{{domainFieldsForm.controls.attributes.controls[i].controls.fieldTypeCtrl.value}}
     </div>
   </div>
   <div>
