@@ -9,7 +9,7 @@
     <label class="mat-text">employees</label>
   </div>
   <div formArrayName="attributes">
-    <div *ngFor="let item of attributes.controls[i]; let i=index;"  [formGroup]="item">
+    <div *ngFor="let item of domainFieldsForm.get('attributes').controls; let i=index;"  [formGroup]="item">
       <!-- Form control for the field name -->
       <div>               
         <mat-form-field class="mat-label">

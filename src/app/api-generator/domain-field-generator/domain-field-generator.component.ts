@@ -35,12 +35,10 @@ export class DomainFieldGeneratorComponent implements OnInit,ControlValueAccesso
   writeValue(obj: any): void {
     obj && this.domainFieldsForm.setValue(obj,{emitEvent:false});
   }
-  registerOnChange(fn: any): void {
-    console.log("on change");
+  registerOnChange(fn: any): void {     
     this.domainFieldsForm.valueChanges.subscribe(fn);
   }
-  registerOnTouched(fn: any): void {
-    console.log("on blur");
+  registerOnTouched(fn: any): void {    
     this.onTouched = fn;
   }
   setDisabledState?(isDisabled: boolean): void {
@@ -61,21 +59,21 @@ export class DomainFieldGeneratorComponent implements OnInit,ControlValueAccesso
   add() {
     console.log("clicked add"); 
     (<FormArray>this.domainFieldsForm.get('attributes')).push(this.createAttributeGroups());  
+   
   }
 
   get attributes():FormArray{
-    return this.domainFieldsForm.get('attributes') as FormArray;
+    return this.domainFieldsForm.get('attributes') as FormArray;     
   }
    
 
   ngOnInit() {
     console.log("in ngonit");    
-    this.domainFieldsForm = this._fb.group({
-      attributes: this._fb.array([
-        this.createAttributeGroups()
-      ])
+    this.domainFieldsForm = this._fb.group({        
+        attributes: this._fb.array([
+          this.createAttributeGroups()
+        ])
   });
-  console.log(this.domainFieldsForm.value);
 
   }
 
