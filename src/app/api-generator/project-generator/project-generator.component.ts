@@ -1,5 +1,9 @@
 import { Component, OnInit, Input, forwardRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ProjectDomain } from 'src/app/model/projectDomain';
+import { ProjectGeneratorService } from './project-generator.service';
+import {MatSnackBar} from '@angular/material';
+import { Project } from 'src/app/model/project';
 
 @Component({
   selector: 'app-project-generator',
@@ -21,7 +25,8 @@ export class ProjectGeneratorComponent implements OnInit,ControlValueAccessor  {
   });
 
   isEditable = false;
-  constructor() { }
+  projData:Project;
+  constructor(private projectService:ProjectGeneratorService,private snackBar: MatSnackBar) { }
 
   public onTouched: () => void = () => {};
 
@@ -29,25 +34,40 @@ export class ProjectGeneratorComponent implements OnInit,ControlValueAccessor  {
   writeValue(obj: any): void {
     obj && this.projectGeneratorForm.setValue(obj,{emitEvent:false});
   }
-  registerOnChange(fn: any): void {
-    console.log("on change");
+  registerOnChange(fn: any): void {    
     this.projectGeneratorForm.valueChanges.subscribe(fn);
   }
-  registerOnTouched(fn: any): void {
-    console.log("on blur");
+  registerOnTouched(fn: any): void {   
     this.onTouched = fn;
   }
   setDisabledState?(isDisabled: boolean): void {
     isDisabled ? this.projectGeneratorForm.disable():this.projectGeneratorForm.enable();
   }
+
+  openSnackBar(message: string, action: string,className:string) {
+    this.snackBar.open(message, action, {
+      duration: 10000,
+      verticalPosition :'top',
+      horizontalPosition:'right',
+      panelClass:[className]
+    });
+  }
  
   
-  submitProject() {
-    console.log(this.projectGeneratorForm.value);
+  submitProject() {   
+    let projObj:ProjectDomain = this.projectGeneratorForm.value;
+    this.projectService.createProject(projObj).subscribe(data=>{      
+      this.projData =  data["data"];
+      console.log(this.projData);
+      this.openSnackBar(data["message"],"Success","custom-snackbar");
+    },error=>{
+      console.log(error);
+      this.openSnackBar(error.error["message"],"Error","custom-snackbar");
+    })
+
   }
 
-  ngOnInit() {
-     console.log(this.projectGeneratorForm);
+  ngOnInit() {     
   }
 
 }
