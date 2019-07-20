@@ -67,8 +67,7 @@ export class DomainFieldGeneratorComponent implements OnInit,ControlValueAccesso
   }
    
 
-  ngOnInit() {
-    console.log("in ngonit");    
+  ngOnInit() {     
     this.domainFieldsForm = this._fb.group({        
         attributes: this._fb.array([
           this.createAttributeGroups()

@@ -15,15 +15,7 @@ export class ApiGeneratorComponent implements OnInit {
   domainFieldGenerator:FormGroup;
   projectDomainGenerator:FormGroup;
   isEditable = false;
-
-  // public projectDomainGenerator:FormGroup = new FormGroup({
-  //   projectInfo:new FormControl("")    
-  // })
-
-  // public DomainFieldGenerator:FormGroup = new FormGroup({
-  //   domainFieldInfo:new FormArray([])
-    
-  // })
+  
   constructor(private _fb:FormBuilder) { }
 
   ngOnInit() {

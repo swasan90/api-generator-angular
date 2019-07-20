@@ -67,7 +67,7 @@ export class ProjectGeneratorComponent implements OnInit,ControlValueAccessor  {
 
   }
 
-  ngOnInit() {     
+  ngOnInit() {  
   }
 
 }
