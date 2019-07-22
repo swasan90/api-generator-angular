@@ -1,5 +1,5 @@
 export interface Project {
-    projectId:string;
+    id:string;
     projectName:string;
     domainName:string;
  }
