@@ -2,22 +2,22 @@
   <p class="mat-para">Add your field name and field data type</p>
   <div>
     <label class="mat-label">Project:</label>
-    <label class="mat-text">Geoscience</label>
+    <label class="mat-text">{{data?.projectName}}</label>
 
 
     <label class="mat-label">Domain:</label>
-    <label class="mat-text">employees</label>
+    <label class="mat-text">{{data?.domainName}}</label>
   </div>
-  <div formArrayName="attributes">
-    <div *ngFor="let item of domainFieldsForm.get('attributes').controls; let i=index;"  [formGroup]="item">
+  <div formArrayName="fields">
+    <div *ngFor="let item of domainFieldsForm.get('fields').controls; let i=index;"  [formGroup]="item">
       <!-- Form control for the field name -->
       <div>               
         <mat-form-field class="mat-label">
-          <input matInput placeholder="Field Name" formControlName="fieldNameCtrl" required autocomplete="off">
+          <input matInput placeholder="Field Name" formControlName="fieldName" required autocomplete="off">
         </mat-form-field>
         <!-- Form control for the field type -->
         <mat-form-field class="mat-label">
-          <mat-select formControlName="fieldTypeCtrl">
+          <mat-select formControlName="fieldType">
             <mat-option *ngFor="let fieldType of fieldTypes" [value]="fieldType.value">
               {{fieldType.viewValue}}
             </mat-option>
@@ -25,8 +25,8 @@
         </mat-form-field>
         <button mat-mini-fab color="primary" (click)="add()"><strong>+</strong></button>
       </div>
-      Chosen name :{{domainFieldsForm.controls.attributes.controls[i].controls.fieldNameCtrl.value}}
-      Chosen type :{{domainFieldsForm.controls.attributes.controls[i].controls.fieldTypeCtrl.value}}
+      Chosen name :{{domainFieldsForm.controls.fields.controls[i].controls.fieldName.value}}
+      Chosen type :{{domainFieldsForm.controls.fields.controls[i].controls.fieldType.value}}
     </div>
   </div>
   <div>
