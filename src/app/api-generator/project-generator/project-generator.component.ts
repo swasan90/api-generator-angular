@@ -1,3 +1,4 @@
+import { ApiGeneratorService } from './../api-generator.service';
 import { Component, OnInit, Input, forwardRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ProjectDomain } from 'src/app/model/projectDomain';
@@ -26,7 +27,7 @@ export class ProjectGeneratorComponent implements OnInit,ControlValueAccessor  {
 
   isEditable = false;
   projData:Project;
-  constructor(private projectService:ProjectGeneratorService,private snackBar: MatSnackBar) { }
+  constructor(private projectService:ProjectGeneratorService,private snackBar: MatSnackBar,private apiGeneratorService:ApiGeneratorService) { }
 
   public onTouched: () => void = () => {};
 
@@ -44,7 +45,7 @@ export class ProjectGeneratorComponent implements OnInit,ControlValueAccessor  {
     isDisabled ? this.projectGeneratorForm.disable():this.projectGeneratorForm.enable();
   }
 
-  openSnackBar(message: string, action: string,className:string) {
+  openSnackBar(message: string, action: string,className:string) {     
     this.snackBar.open(message, action, {
       duration: 10000,
       verticalPosition :'top',
@@ -57,17 +58,18 @@ export class ProjectGeneratorComponent implements OnInit,ControlValueAccessor  {
   submitProject() {   
     let projObj:ProjectDomain = this.projectGeneratorForm.value;
     this.projectService.createProject(projObj).subscribe(data=>{      
-      this.projData =  data["data"];
-      console.log(this.projData);
-      this.openSnackBar(data["message"],"Success","custom-snackbar");
+      this.projData =  data["resObj"];
+      localStorage.setItem("projectData",JSON.stringify(this.projData));      
+      this.openSnackBar(data["message"],"Success","custom-success-snackbar");
+      this.apiGeneratorService.getCurrentProject(this.projData);     
     },error=>{
       console.log(error);
-      this.openSnackBar(error.error["message"],"Error","custom-snackbar");
+      this.openSnackBar(error.error["message"],"Error","custom-eror-snackbar");
     })
 
   }
 
-  ngOnInit() {  
+  ngOnInit() {       
   }
 
 }
