@@ -1,8 +1,13 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-.custom-snackbar{
+.custom-eror-snackbar{
     color:#D61A46;
     background:#FBDFE6;    
+  }
+
+  .custom-success-snackbar{
+    color:#305A30;
+    background:#E3F08E;    
   }
   
   
