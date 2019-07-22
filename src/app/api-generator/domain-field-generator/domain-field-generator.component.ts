@@ -1,8 +1,10 @@
+import { ApiGeneratorService } from './../api-generator.service';
  
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, OnInit, forwardRef, Input } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FieldType } from 'src/app/model/fieldType';
+import { Project } from 'src/app/model/project';
 @Component({
   selector: 'app-domain-field-generator',
   templateUrl: './domain-field-generator.component.html',
@@ -26,8 +28,12 @@ export class DomainFieldGeneratorComponent implements OnInit,ControlValueAccesso
     { value: "boolean", viewValue: "Boolean" }
   ];
  
+  currentproject:Project;
 
-  constructor(private _fb:FormBuilder) { }  
+  projectName:string;
+  domainName:string;
+  projectId:string;
+  constructor(private _fb:FormBuilder,private apiGeneratorService:ApiGeneratorService) { }  
 
   public onTouched: () => void = () => {};
 
@@ -45,35 +51,38 @@ export class DomainFieldGeneratorComponent implements OnInit,ControlValueAccesso
     isDisabled ? this.domainFieldsForm.disable():this.domainFieldsForm.enable();
   }
 
-  submitDomainFields() {
-    console.log(this.domainFieldsForm.value);
+  submitDomainFields() {     
+    let domainFieldObj:any={};    
+    domainFieldObj = this.domainFieldsForm.value;
+    domainFieldObj.projectId = this.currentproject.id;    
   }
 
   createAttributeGroups(){
     return this._fb.group({
-        fieldNameCtrl :new FormControl("",[Validators.required]),
-        fieldTypeCtrl :new FormControl("",[Validators.required])  
+        fieldName :new FormControl("",[Validators.required]),
+        fieldType :new FormControl("",[Validators.required])  
     });
   }
 
-  add() {
-    console.log("clicked add"); 
-    (<FormArray>this.domainFieldsForm.get('attributes')).push(this.createAttributeGroups());  
+  add() {     
+    (<FormArray>this.domainFieldsForm.get('fields')).push(this.createAttributeGroups());  
    
   }
 
-  get attributes():FormArray{
-    return this.domainFieldsForm.get('attributes') as FormArray;     
+  get fields():FormArray{
+    return this.domainFieldsForm.get('fields') as FormArray;     
   }
    
 
   ngOnInit() {     
     this.domainFieldsForm = this._fb.group({        
-        attributes: this._fb.array([
+         fields: this._fb.array([
           this.createAttributeGroups()
         ])
-  });
-
+  });   
+  this.apiGeneratorService.currentProject.subscribe(project=>{
+      this.currentproject = JSON.parse(project);
+  });  
   }
 
 }
