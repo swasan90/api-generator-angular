@@ -20,4 +20,9 @@ export class ApiGeneratorService {
   getCurrentProject(project:Project){
     this.projectSource.next(JSON.stringify(project));
   }
+
+  cleanString(field:string){         
+    var str = field.trim().toLowerCase();     
+    return str.replace(/\s+/g, "_");
+  }
 }
