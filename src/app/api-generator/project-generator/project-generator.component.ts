@@ -61,8 +61,7 @@ export class ProjectGeneratorComponent implements OnInit, ControlValueAccessor {
       this.apiGeneratorService.getCurrentProject(this.projData);
       this.stepper.next();
       this.stepper.selected.completed = true;
-    }, error => {
-       
+    }, error => {       
       if (error.error.errors != null) {
         let str:string="";
         for (let obj of error.error.errors) {
@@ -77,7 +76,13 @@ export class ProjectGeneratorComponent implements OnInit, ControlValueAccessor {
 
   }
 
+  getProjectNameErrorMessage(){     
+    return this.projectGeneratorForm.get('projectName').hasError('required')?"Project Name is required*":'';
+  }
 
+  getDomainNameErrorMessage(){
+    return this.projectGeneratorForm.get('domainName').hasError('required')?"Domain Name is required*":'';
+  }
 
   formatString(fieldVal: string, event: any) {
     this.projectGeneratorForm.get(event.target.attributes.getNamedItem('formcontrolname').value)
