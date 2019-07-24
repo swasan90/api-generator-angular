@@ -62,14 +62,14 @@ export class DomainFieldGeneratorComponent implements OnInit, ControlValueAccess
     isDisabled ? this.domainFieldsForm.disable() : this.domainFieldsForm.enable();
   }
 
-  submitDomainFields() {
+  submitDomainFields(index:number) {
     let domainFieldObj: any = {};
     domainFieldObj = this.domainFieldsForm.value;
     domainFieldObj.projectId = this.currentproject.id;
     this.domainFieldService.addDomainFields(domainFieldObj).subscribe(data => {
-      this.snackBar.openSnackBar(data["message"], "Success", "custom-success-snackbar");
-      this.stepper.next();    
+      this.snackBar.openSnackBar(data["message"], "Success", "custom-success-snackbar");         
       this.stepper.selected.completed = true; 
+      this.stepper.selectedIndex = index; 
     }, error => {
       console.log(error);
       this.snackBar.openSnackBar(error.error["message"], "Error", "custom-eror-snackbar");
