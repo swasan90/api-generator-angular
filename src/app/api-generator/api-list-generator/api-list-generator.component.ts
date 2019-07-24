@@ -5,6 +5,7 @@ import { ApiGeneratorService } from '../api-generator.service';
 import { Project } from 'src/app/model/project';
 import { ApiListGeneratorService } from './api-list-generator.service';
 import { SnackbarService } from '../snackbar.service';
+import { MatStepper } from '@angular/material';
 
 @Component({
   selector: 'app-api-list-generator',
@@ -13,27 +14,22 @@ import { SnackbarService } from '../snackbar.service';
 })
 export class ApiListGeneratorComponent implements OnInit  {
    
-
-  // API_DATA: ApiEndPoints[] = [
-  //   { endpoint_name: "employees.delete", endpoint_url: "apigenerator/Geoscience/employees/ec9164b0-a7ed-11e9-bf1f-d51928148523", method_type: "DELETE" },
-  //   { endpoint_name: "employees.list", endpoint_url: "apigenerator/Geoscience/employees", method_type: "GET" }
-  // ]
+  @Input() stepper:MatStepper;
 
   endPointsData: ApiEndPoints[] = [];
-  displayedColumns: string[] = ['Endpoint Name', 'Endpoint Url', 'Method Type'];
-
+  // displayedColumnHeaders: string[] = ['Endpoint Name', 'Endpoint Url', 'Method Type'];
+  displayedColumns: string[] = ['endpoint_name', 'endpoint_url', 'method_type'];
+  
   currentProject: Project;
   constructor(private apiGeneratorService: ApiGeneratorService, private apiListService: ApiListGeneratorService,
     private snackBar: SnackbarService) { }
 
 
   getApiEndPoints() {     
-    this.apiListService.getApiEndpointsForProject(this.currentProject.id).subscribe(data => {
-      console.log(data["data"]);
+    this.apiListService.getApiEndpointsForProject(this.currentProject.id).subscribe(data => {       
       this.endPointsData = data["data"];
       this.snackBar.openSnackBar("Successfully created table:" + this.currentProject.domainName, "Success", "custom-success-snackbar");
-    }, error => {
-      console.log(error);
+    }, error => {     
       this.snackBar.openSnackBar("Unable to create table :" + this.currentProject.domainName, "Error", "custom-error-snackbar");
     });
   }
