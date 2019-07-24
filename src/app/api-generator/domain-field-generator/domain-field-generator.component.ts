@@ -98,6 +98,10 @@ export class DomainFieldGeneratorComponent implements OnInit, ControlValueAccess
     controlArray.controls[index].get('fieldName').setValue(this.apiGeneratorService.cleanString(fieldVal));
   }
 
+  remove(index:number){  
+     (<FormArray>this.domainFieldsForm.get('fields')).removeAt(index);    
+  }
+
   ngOnInit() {
     this.domainFieldsForm = this._fb.group({
       fields: this._fb.array([

@@ -7,6 +7,8 @@
 
     <label class="mat-label">Domain:</label>
     <label class="mat-text">{{data?.domainName}}</label>
+
+    <button mat-mini-fab color="primary" (click)="add()"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></button>
   </div>
   <div formArrayName="fields">
     <div *ngFor="let item of domainFieldsForm.get('fields').controls; let i=index;"  [formGroup]="item">
@@ -23,9 +25,11 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <button mat-mini-fab color="primary" (click)="add()"><strong>+</strong></button>
+        <!-- <button mat-mini-fab color="primary" (click)="add()"><strong>+</strong></button>
+        <div class="divider"></div> -->
+        <button mat-button color="warn" (click)="remove(i)"><i class="fas fa-trash fa-lg" aria-hidden="true"></i></button>
       </div>     
-    </div>
+    </div>       
   </div>
   <div>     
     <button mat-raised-button color="accent" matStepperNext (click)="submitDomainFields()">Next</button>

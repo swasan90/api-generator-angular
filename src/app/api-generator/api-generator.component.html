@@ -1,7 +1,7 @@
 <h4>Create your API</h4>
 <mat-horizontal-stepper linear labelPosition="bottom"  #stepper>
   <!-- Step:1 Create project and domain name -->
-  <mat-step  [editable]="isEditable" [completed] = "isCompleted" #step1>
+  <mat-step [editable]="isEditable" [completed] = "isCompleted" #step1>
     <form *ngIf="stepper.selected ==null||stepper.selected==step1" [formGroup]="projectDomainGenerator" class="parent">
       <ng-template matStepLabel>Create Project & Domain</ng-template>
       <app-project-generator [stepper]=matStepper formControlName="projectInfo"></app-project-generator>
