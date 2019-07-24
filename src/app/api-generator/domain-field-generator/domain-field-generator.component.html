@@ -1,4 +1,4 @@
-<div [formGroup]="domainFieldsForm">
+<div [formGroup]="domainFieldsForm" >
   <p class="mat-para">Add your field name and field data type</p>
   <div>
     <label class="mat-label">Project:</label>
@@ -13,7 +13,7 @@
       <!-- Form control for the field name -->
       <div>               
         <mat-form-field class="mat-label">
-          <input matInput placeholder="Field Name" formControlName="fieldName" required autocomplete="off">
+          <input matInput placeholder="Field Name" formControlName="fieldName" #fieldName (blur)="formatString(fieldName.value,$event,i)"required autocomplete="off">
         </mat-form-field>
         <!-- Form control for the field type -->
         <mat-form-field class="mat-label">
@@ -24,14 +24,12 @@
           </mat-select>
         </mat-form-field>
         <button mat-mini-fab color="primary" (click)="add()"><strong>+</strong></button>
-      </div>
-      Chosen name :{{domainFieldsForm.controls.fields.controls[i].controls.fieldName.value}}
-      Chosen type :{{domainFieldsForm.controls.fields.controls[i].controls.fieldType.value}}
+      </div>     
     </div>
   </div>
   <div>
-    <button mat-raised-button matStepperPrevious>Back</button>
-    <div class="divider"></div>
+    <!-- <button mat-raised-button matStepperPrevious>Back</button> -->
+    <!-- <div class="divider"></div> -->
     <button mat-raised-button color="accent" matStepperNext (click)="submitDomainFields()">Next</button>
   </div>
 </div>
