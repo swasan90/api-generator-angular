@@ -101,7 +101,7 @@ export class DomainFieldGeneratorComponent implements OnInit, ControlValueAccess
   remove(index:number){  
      (<FormArray>this.domainFieldsForm.get('fields')).removeAt(index);    
   }
-
+ 
   ngOnInit() {
     this.domainFieldsForm = this._fb.group({
       fields: this._fb.array([
@@ -109,7 +109,7 @@ export class DomainFieldGeneratorComponent implements OnInit, ControlValueAccess
       ])
     });
     this.apiGeneratorService.currentProject.subscribe(project => {
-      this.currentproject = JSON.parse(project);
+      this.currentproject = JSON.parse(project);      
     });
 
   }
