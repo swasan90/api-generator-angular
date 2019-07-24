@@ -53,15 +53,15 @@
     font-family:'Verdana';
   }
 
-  .mat-column-endpointname{
+  .mat-column-endpoint_name{
       padding-right:90px;      
   }
 
-  .mat-column-endpointurl{
+  .mat-column-endpoint_url{
     padding-right:90px;
    
 }
-.mat-column-methodtype{
+.mat-column-method_type{
     padding-right:90px;   
 }
 
