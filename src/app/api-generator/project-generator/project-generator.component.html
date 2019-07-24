@@ -5,7 +5,7 @@
     <label class="mat-label">Project Name : </label>
     <mat-form-field>
       <input matInput #projectName formControlName="projectName"
-        (blur)="formatString(projectName.value,$event)" required autocomplete="off">    
+        (blur)="formatString(projectName.value,$event)"  autocomplete="off">    
         <mat-error *ngIf="projectGeneratorForm.invalid">{{getProjectNameErrorMessage()}}</mat-error>    
     </mat-form-field>    
   </div>
@@ -14,11 +14,11 @@
     <label class="mat-label">Domain Name : </label>
     <mat-form-field>
       <input matInput  #domainName formControlName="domainName"
-        (blur)="formatString(domainName.value,$event)" required autocomplete="off">
+        (blur)="formatString(domainName.value,$event)"  autocomplete="off">
         <mat-error *ngIf="projectGeneratorForm.invalid">{{getDomainNameErrorMessage()}}</mat-error>    
     </mat-form-field>
   </div>
   <div>
-    <button mat-raised-button color="accent" [disabled]="projectGeneratorForm.invalid" (click)="submitProject()">Next</button>
+    <button mat-raised-button color="accent" [disabled]="projectGeneratorForm.invalid" (click)="submitProject(1)">Next</button>
   </div>
 </div>
