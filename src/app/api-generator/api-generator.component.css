@@ -53,16 +53,16 @@
     font-family:'Verdana';
   }
 
-  .mat-column-endpoint_name{
-      padding-right:70px;      
+  .mat-column-endpointname{
+      padding-right:90px;      
   }
 
-  .mat-column-endpoint_url{
-    padding-right:70px;
+  .mat-column-endpointurl{
+    padding-right:90px;
    
 }
-.mat-column-method_type{
-    padding-right:70px;   
+.mat-column-methodtype{
+    padding-right:90px;   
 }
 
 .mat-header-cell {
