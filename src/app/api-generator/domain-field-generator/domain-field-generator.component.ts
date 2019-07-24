@@ -1,10 +1,16 @@
+import { MatStepper } from '@angular/material';
 import { ApiGeneratorService } from './../api-generator.service';
  
-import { Component, OnInit, forwardRef, Input } from '@angular/core';
+import { Component, OnInit, forwardRef, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FieldType } from 'src/app/model/fieldType';
 import { Project } from 'src/app/model/project';
+import { DomainFieldGeneratorService } from './domain-field-generator.service'; 
+import { SnackbarService } from '../snackbar.service';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { ApiListGeneratorService } from '../api-list-generator/api-list-generator.service';
+import { ApiListGeneratorComponent } from '../api-list-generator/api-list-generator.component';
 @Component({
   selector: 'app-domain-field-generator',
   templateUrl: './domain-field-generator.component.html',
@@ -17,7 +23,7 @@ import { Project } from 'src/app/model/project';
     }
   ]
 })
-export class DomainFieldGeneratorComponent implements OnInit,ControlValueAccessor {
+export class DomainFieldGeneratorComponent implements OnInit,ControlValueAccessor  {
   
   isEditable = false; 
   domainFieldsForm:FormGroup;
@@ -33,7 +39,10 @@ export class DomainFieldGeneratorComponent implements OnInit,ControlValueAccesso
   projectName:string;
   domainName:string;
   projectId:string;
-  constructor(private _fb:FormBuilder,private apiGeneratorService:ApiGeneratorService) { }  
+ 
+  constructor(private _fb:FormBuilder,private apiGeneratorService:ApiGeneratorService,
+    private domainFieldService:DomainFieldGeneratorService,private snackBar: SnackbarService,
+    private apiListService:ApiListGeneratorService) { }  
 
   public onTouched: () => void = () => {};
 
@@ -54,7 +63,14 @@ export class DomainFieldGeneratorComponent implements OnInit,ControlValueAccesso
   submitDomainFields() {     
     let domainFieldObj:any={};    
     domainFieldObj = this.domainFieldsForm.value;
-    domainFieldObj.projectId = this.currentproject.id;    
+    domainFieldObj.projectId = this.currentproject.id;   
+    this.domainFieldService.addDomainFields(domainFieldObj).subscribe(data=>{       
+      this.snackBar.openSnackBar(data["message"],"Success","custom-success-snackbar");       
+    },error=>{
+      console.log(error);
+      this.snackBar.openSnackBar(error.error["message"],"Error","custom-eror-snackbar");
+      this.domainFieldsForm.reset;
+    }); 
   }
 
   createAttributeGroups(){
@@ -72,7 +88,11 @@ export class DomainFieldGeneratorComponent implements OnInit,ControlValueAccesso
   get fields():FormArray{
     return this.domainFieldsForm.get('fields') as FormArray;     
   }
-   
+ 
+  formatString(fieldVal:string,event:any,index:number){           
+    const controlArray = <FormArray>this.domainFieldsForm.get('fields');
+    controlArray.controls[index].get('fieldName').setValue(this.apiGeneratorService.cleanString(fieldVal));
+  }
 
   ngOnInit() {     
     this.domainFieldsForm = this._fb.group({        
@@ -82,7 +102,10 @@ export class DomainFieldGeneratorComponent implements OnInit,ControlValueAccesso
   });   
   this.apiGeneratorService.currentProject.subscribe(project=>{
       this.currentproject = JSON.parse(project);
-  });  
+  });
+  
   }
+ 
+  
 
 }
