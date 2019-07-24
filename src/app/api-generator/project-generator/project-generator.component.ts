@@ -52,15 +52,15 @@ export class ProjectGeneratorComponent implements OnInit, ControlValueAccessor {
     isDisabled ? this.projectGeneratorForm.disable() : this.projectGeneratorForm.enable();
   }
 
-  submitProject() {
+  submitProject(index:number) {
     let projObj: ProjectDomain = this.projectGeneratorForm.value;
     this.projectService.createProject(projObj).subscribe(data => {
       this.projData = data["resObj"];
       localStorage.setItem("projectData", JSON.stringify(this.projData));
       this.snackBar.openSnackBar(data["message"], "Success", "custom-success-snackbar");
-      this.apiGeneratorService.getCurrentProject(this.projData);
-      this.stepper.next();
+      this.apiGeneratorService.getCurrentProject(this.projData);     
       this.stepper.selected.completed = true;
+      this.stepper.selectedIndex = index;     
     }, error => {       
       if (error.error.errors != null) {
         let str:string="";
