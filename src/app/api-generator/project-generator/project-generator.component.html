@@ -1,15 +1,15 @@
 <!-- Step:1 Create project and domain name -->
-<div [formGroup]="projectGeneratorForm">
+<div [formGroup]="projectGeneratorForm" >
   <div >
     <label class="mat-label">Project Name : </label>
     <mat-form-field>
-      <input matInput placeholder="Project name" formControlName="projectName" required autocomplete="off">
+      <input matInput placeholder="Project name" #projectName formControlName="projectName" (blur)="formatString(projectName.value,$event)" required autocomplete="off">
     </mat-form-field>
   </div>
   <div>
     <label class="mat-label">Domain Name : </label>
     <mat-form-field>
-      <input matInput placeholder="Domain name" formControlName="domainName" required autocomplete="off">
+      <input matInput placeholder="Domain name" #domainName formControlName="domainName"  (blur)="formatString(domainName.value,$event)"required autocomplete="off">
     </mat-form-field>
   </div>
   <div>
