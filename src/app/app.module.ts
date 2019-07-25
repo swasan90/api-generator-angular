@@ -31,6 +31,7 @@ import { DomainFieldGeneratorComponent } from './api-generator/domain-field-gene
 import { ApiListGeneratorComponent } from './api-generator/api-list-generator/api-list-generator.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RemoveUnderscorePipe } from './remove-underscore-pipe';
+import { CrudProcessorComponent } from './crud-processor/crud-processor.component';
  
 
 @NgModule({
@@ -42,7 +43,8 @@ import { RemoveUnderscorePipe } from './remove-underscore-pipe';
     DomainFieldGeneratorComponent,
     ApiListGeneratorComponent,
     DashboardComponent,
-    RemoveUnderscorePipe
+    RemoveUnderscorePipe,
+    CrudProcessorComponent
   ],
   imports: [
     BrowserModule,
