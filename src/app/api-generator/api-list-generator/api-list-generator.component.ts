@@ -16,6 +16,8 @@ export class ApiListGeneratorComponent implements OnInit  {
    
   @Input() stepper:MatStepper;
 
+  @Input() projectFormGroup:FormGroup;
+
   endPointsData: ApiEndPoints[] = [];
   // displayedColumnHeaders: string[] = ['Endpoint Name', 'Endpoint Url', 'Method Type'];
   displayedColumns: string[] = ['endpoint_name', 'endpoint_url', 'method_type'];
@@ -40,6 +42,10 @@ export class ApiListGeneratorComponent implements OnInit  {
     });
   }
 
+  reset(){
+    this.stepper.reset();    
+    this.projectFormGroup.reset();
+  }
 
   ngOnInit() {
     this.init();

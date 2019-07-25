@@ -17,9 +17,9 @@
   </mat-step>
 
   <!-- Step:3 Status of the step- provides you the api endpoint list -->
-  <mat-step [editable]="!isEditable" [completed] = "isCompleted" #step3>
+  <mat-step  [editable]="!isEditable" [completed] = "isCompleted" #step3>
     <ng-template matStepLabel>Status</ng-template>
-    <app-api-list-generator [stepper]=matStepper *ngIf="stepper.selected==step3"></app-api-list-generator>
+    <app-api-list-generator [stepper]=matStepper [projectFormGroup]= projectDomainGenerator *ngIf="stepper.selected==step3"></app-api-list-generator>
   </mat-step>
 
 </mat-horizontal-stepper>
