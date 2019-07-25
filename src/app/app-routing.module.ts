@@ -6,22 +6,17 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { FullLayoutComponent } from './layout/full-layout/full-layout.component';
 import { ApiGeneratorComponent } from './api-generator/api-generator.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'api/dashboard',
     pathMatch: 'full'
   },
-  {
-    path: 'dashboard',
-    component: FullLayoutComponent,
-    data: {
-      title: 'Home',
-    }
-  },
+   
   {
     path: 'api',
     component: FullLayoutComponent,
@@ -29,7 +24,11 @@ export const routes: Routes = [
       {
         path: 'create_api',
         component: ApiGeneratorComponent
-      }
+      } ,
+      {
+        path: 'dashboard',
+        component: DashboardComponent
+      }      
     ]
 
   }
