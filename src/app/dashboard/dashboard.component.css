@@ -1,0 +1,21 @@
+.dashboard-tree-invisible {
+    display: none;
+  }
+  
+  .dashboard-tree ul,
+  .dashboard-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+    background-color:#f5fbff;
+    
+  }
+
+  .container-body{
+      padding:50px;     
+  }
+
+  .flat-btn{
+      color:#3b6879;
+      font-weight:100px;
+  }
