@@ -14,7 +14,9 @@ import { MatStepperModule,
          MatButtonModule,
          MatSelectModule,
          MatTableModule ,
-         MatSnackBarModule  
+         MatSnackBarModule ,
+         MatTreeModule,
+         MatIconModule
       } 
 from '@angular/material';
 
@@ -26,7 +28,8 @@ import { ApiGeneratorComponent } from './api-generator/api-generator.component';
 import { ProjectGeneratorComponent } from './api-generator/project-generator/project-generator.component';
 import { DomainFieldGeneratorComponent } from './api-generator/domain-field-generator/domain-field-generator.component';
 import { ApiListGeneratorComponent } from './api-generator/api-list-generator/api-list-generator.component';
-import { DashboardComponent } from './app/dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { RemoveUnderscorePipe } from './remove-underscore-pipe';
  
 
 @NgModule({
@@ -37,7 +40,8 @@ import { DashboardComponent } from './app/dashboard/dashboard.component';
     ProjectGeneratorComponent,
     DomainFieldGeneratorComponent,
     ApiListGeneratorComponent,
-    DashboardComponent
+    DashboardComponent,
+    RemoveUnderscorePipe
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,9 @@ import { DashboardComponent } from './app/dashboard/dashboard.component';
     MatSelectModule ,
     MatButtonModule,
     MatTableModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTreeModule,
+    MatIconModule
   ],
   providers: [
     {
