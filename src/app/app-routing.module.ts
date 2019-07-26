@@ -7,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FullLayoutComponent } from './layout/full-layout/full-layout.component';
 import { ApiGeneratorComponent } from './api-generator/api-generator.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CrudProcessorComponent } from './crud-processor/crud-processor.component';
 
 
 
@@ -28,6 +29,10 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent
+      },
+      {
+        path: 'crud_processor',
+        component: CrudProcessorComponent
       }      
     ]
 
