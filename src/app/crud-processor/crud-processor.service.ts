@@ -15,6 +15,6 @@ export class CrudProcessorService {
   }
 
   public getColumnNames(id:string):Observable<any>{
-    return this.httpClient.get(environment.api_url+"getSchemaData/"+id);
+    return this.httpClient.get(environment.api_url+"getColumnData/"+id);
   }
 }
