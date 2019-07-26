@@ -7,8 +7,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CrudProcessorService {
-
+export class CrudProcessorService {  
   constructor(private httpClient:HttpClient) { }
 
   public listAll(projectName:string,domainName:string):Observable<any>{   
