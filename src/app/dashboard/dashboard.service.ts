@@ -22,6 +22,6 @@ export class DashboardService {
   }
 
   public getSelectedDomainForCrudOps(){
-    return localStorage.getItem("currentDomain");
+    return JSON.parse(localStorage.getItem("currentDomain"));
   }
 }
