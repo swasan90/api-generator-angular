@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../dashboard/dashboard.service';
 import { ProjectDomain } from '../model/projectDomain';
 import { CrudProcessorService } from './crud-processor.service';
+import { SnackbarService } from '../api-generator/snackbar.service';
 
 @Component({
   selector: 'app-crud-processor',
@@ -33,12 +34,10 @@ export class CrudProcessorComponent implements OnInit {
       this.snackbarService.openSnackBar(error.error["message"], "Error", "custom-eror-snackbar");
     });
 
-  }
-
-
+  } 
 
   ngOnInit() {
-    this.currentDomain = JSON.parse(this.dashboardService.getSelectedDomainForCrudOps());      
+    this.currentDomain =  this.dashboardService.getSelectedDomainForCrudOps();      
     this.getDisplayedColumns(this.currentDomain.id);   
     this.loadData(); 
   }
