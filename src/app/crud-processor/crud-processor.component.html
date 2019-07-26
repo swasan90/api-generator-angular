@@ -29,6 +29,6 @@
 
   <!-- Mat card to display if there is no records-->
   <mat-card *ngIf="dataSource.length==0" class="mat-card-style">No records found. Click on the link to
-    <a [routerLink]="">add</a> data </mat-card>
+    <a [routerLink]="['/api/crud_processor/add']" >add</a> data </mat-card>
 
 </div>
