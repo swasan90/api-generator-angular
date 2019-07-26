@@ -1,0 +1,37 @@
+.container-body{
+    padding:80px;   
+    
+}
+
+.crud-tab-icon {
+    margin-right: 8px;
+  }
+
+  .project-label {
+    display: flex;
+    justify-content: center;    
+    flex-direction: column;
+    padding:50px;
+  }
+
+  .divider{
+    width:60px;
+    height:auto;
+    display:inline-block;
+}
+
+.mat-label{
+    display: inline-block;
+    margin-bottom: .50rem;
+    clear: left;
+    padding-right: 40px; 
+    color:#58427C;
+    font-style:bold;
+    font-weight: 600;
+  }
+  
+  .mat-card-style{
+    text-align: center;
+    justify-content: center;
+  }
+

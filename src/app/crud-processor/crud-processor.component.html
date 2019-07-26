@@ -1,3 +1,34 @@
-<p>
-  crud-processor works!
-</p>
+<div class="container-body">
+  <div class="project-label">
+    <div>
+      <label class="mat-label">Project:</label>
+      <label class="mat-text">{{currentDomain?.projectName|titlecase|removeunderscore}}</label>
+
+      <div class="divider"></div>
+
+      <label class="mat-label">Project Id:</label>
+      <label class="mat-text">{{currentDomain?.id }}</label>
+
+      <div class="divider"></div>
+
+      <label class="mat-label">Domain:</label>
+      <label class="mat-text">{{currentDomain?.domainName |titlecase|removeunderscore}}</label>
+    </div>
+  </div>
+
+  <!-- Mat table to display data -->
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource.length>0">
+    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <!-- Mat card to display if there is no records-->
+  <mat-card *ngIf="dataSource.length==0" class="mat-card-style">No records found. Click on the link to
+    <a [routerLink]="">add</a> data </mat-card>
+
+</div>
