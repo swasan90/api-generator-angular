@@ -16,7 +16,8 @@ import { MatStepperModule,
          MatTableModule ,
          MatSnackBarModule ,
          MatTreeModule,
-         MatIconModule
+         MatIconModule,
+         MatCardModule
           
       } 
 from '@angular/material';
@@ -62,7 +63,8 @@ import { CrudProcessorComponent } from './crud-processor/crud-processor.componen
     MatTableModule,
     MatSnackBarModule,
     MatTreeModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule
      
   ],
   providers: [
