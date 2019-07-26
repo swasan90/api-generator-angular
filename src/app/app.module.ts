@@ -33,6 +33,7 @@ import { ApiListGeneratorComponent } from './api-generator/api-list-generator/ap
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RemoveUnderscorePipe } from './remove-underscore-pipe';
 import { CrudProcessorComponent } from './crud-processor/crud-processor.component';
+import { AddCrudComponent } from './crud-processor/add-crud/add-crud.component';
  
 
 @NgModule({
@@ -45,7 +46,8 @@ import { CrudProcessorComponent } from './crud-processor/crud-processor.componen
     ApiListGeneratorComponent,
     DashboardComponent,
     RemoveUnderscorePipe,
-    CrudProcessorComponent
+    CrudProcessorComponent,
+    AddCrudComponent
   ],
   imports: [
     BrowserModule,
