@@ -11,6 +11,7 @@ import { Fields } from 'src/app/model/fields';
 import { AddCrudService } from './add-crud.service';
 import { TextBoxControl } from './control-type/textbox-control';
 import { AnimationKeyframesSequenceMetadata } from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-crud',
@@ -28,7 +29,8 @@ export class AddCrudComponent implements OnInit ,ControlValueAccessor{
   currentDomain: ProjectDomain;
   formControls: MetaData<any>[] = [];
 
-  constructor(private addCrudService: AddCrudService, private snackBarService: SnackbarService,private crudService:CrudProcessorService) { }
+  constructor(private addCrudService: AddCrudService, 
+    private snackBarService: SnackbarService,private crudService:CrudProcessorService,private router:Router) { }
    
   
   receiveEvent(form:FormGroup){
@@ -36,7 +38,18 @@ export class AddCrudComponent implements OnInit ,ControlValueAccessor{
   }
 
   save(){
-    console.log(this.addFormGroup.value);
+    let formObj = this.addFormGroup.value;
+    this.addCrudService.persistRecord(formObj,this.currentDomain.projectName,this.currentDomain.domainName).subscribe(resp=>{
+      this.snackBarService.openSnackBar(resp["message"],"Success","custom-success-snackbar");      
+      this.router.navigate(["/api/crud_processor"]);
+    },error=>{
+      console.log(error);
+      this.snackBarService.openSnackBar(error.error["message"], "Error", "custom-eror-snackbar");
+    });
+  }
+
+  cancel(){
+    this.router.navigate(['/api/crud_processor']);
   }
 
   public onTouched: () => void = () => { };
