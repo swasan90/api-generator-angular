@@ -1,16 +1,12 @@
 import { MatStepper } from '@angular/material';
 import { ApiGeneratorService } from './../api-generator.service';
-
-import { Component, OnInit, forwardRef, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
-
+import { Component, OnInit, forwardRef, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FieldType } from 'src/app/model/fieldType';
 import { Project } from 'src/app/model/project';
 import { DomainFieldGeneratorService } from './domain-field-generator.service';
 import { SnackbarService } from '../snackbar.service';
-import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { ApiListGeneratorService } from '../api-list-generator/api-list-generator.service';
-import { ApiListGeneratorComponent } from '../api-list-generator/api-list-generator.component';
 @Component({
   selector: 'app-domain-field-generator',
   templateUrl: './domain-field-generator.component.html',
@@ -41,8 +37,7 @@ export class DomainFieldGeneratorComponent implements OnInit, ControlValueAccess
   projectId: string;
 
   constructor(private _fb: FormBuilder, private apiGeneratorService: ApiGeneratorService,
-    private domainFieldService: DomainFieldGeneratorService, private snackBar: SnackbarService,
-    private apiListService: ApiListGeneratorService) { }
+    private domainFieldService: DomainFieldGeneratorService, private snackBar: SnackbarService) { }
 
   @Input() stepper:MatStepper; 
 
