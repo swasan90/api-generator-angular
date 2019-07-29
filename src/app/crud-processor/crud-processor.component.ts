@@ -4,6 +4,9 @@ import { DashboardService } from '../dashboard/dashboard.service';
 import { ProjectDomain } from '../model/projectDomain';
 import { CrudProcessorService } from './crud-processor.service';
 import { SnackbarService } from '../api-generator/snackbar.service';
+import { Fields } from '../model/fields';
+import { MetaData } from '../model/metaData';
+import { TextBoxControl } from './add-crud/control-type/textbox-control';
 
 @Component({
   selector: 'app-crud-processor',
@@ -33,16 +36,12 @@ export class CrudProcessorComponent implements OnInit {
       console.log(error);
       this.snackbarService.openSnackBar(error.error["message"], "Error", "custom-eror-snackbar");
     });
-
   } 
 
   ngOnInit() {
     this.currentDomain =  this.dashboardService.getSelectedDomainForCrudOps();      
     this.getDisplayedColumns(this.currentDomain.id);   
     this.loadData(); 
+    this.crudService.buildSchemaArray(); 
   }
-
-  
-
-
 }
