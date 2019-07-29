@@ -1,20 +1,14 @@
 <div class="container-body">
   <mat-card>
-    <mat-card-header class="title">
-      <mat-card-title>Add record</mat-card-title>
-      <mat-card-subtitle>Table : {{currentDomain?.domainName|titlecase|removeunderscore}}</mat-card-subtitle>
-    </mat-card-header>
-    <hr />
-    <mat-card-content>
-      <div *ngFor="let col of columns">
-        <label>{{col.name | titlecase|removeunderscore}}</label>
-        <mat-form-field>
-          <input matInput autocomplete="off"  >
-        </mat-form-field>
-      </div>
+     <app-card-header [childControl]="formControls" [currentDomain]= "currentDomain" (formEvent)="receiveEvent($event)" ></app-card-header>
+     
+    <mat-card-content>       
+        <div *ngFor="let formControl of formControls" >          
+            <app-card-content [control]="formControl" [formGroup]="addFormGroup" ></app-card-content>
+        </div>       
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="accent" >Save</button>
+      <button mat-raised-button color="accent" [disabled]="!addFormGroup.valid"(click)="save()">Save</button>
       <button mat-raised-button>Cancel</button>
     </mat-card-actions>
   </mat-card>
