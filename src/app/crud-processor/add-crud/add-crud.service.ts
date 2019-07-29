@@ -10,7 +10,7 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 })
 export class AddCrudService {
 
-  constructor() { }  
+  constructor(private httpClient:HttpClient) { }  
    toFormGroup(formControls: MetaData<any>[]) {  
     let group: any = {};      
     formControls.forEach(formControl=>{      
@@ -18,6 +18,10 @@ export class AddCrudService {
                                               : new FormControl(formControl.value || '');
     });   
     return new FormGroup(group);
+  }
+
+  public persistRecord(formObj:any,projectName:string,domainName:string):Observable<any>{
+    return this.httpClient.post(environment.api_url+"apigenerator/"+projectName+"/"+domainName,formObj);
   }
 
 }
