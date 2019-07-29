@@ -17,7 +17,8 @@ import { MatStepperModule,
          MatSnackBarModule ,
          MatTreeModule,
          MatIconModule,
-         MatCardModule
+         MatCardModule,
+         MatRadioModule
           
       } 
 from '@angular/material';
@@ -34,6 +35,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RemoveUnderscorePipe } from './remove-underscore-pipe';
 import { CrudProcessorComponent } from './crud-processor/crud-processor.component';
 import { AddCrudComponent } from './crud-processor/add-crud/add-crud.component';
+import { MatCardContentComponent } from './crud-processor/add-crud/mat-card-content.component';
+import { MatCardHeaderComponent } from './crud-processor/add-crud/mat-card-header.component';
  
 
 @NgModule({
@@ -47,7 +50,9 @@ import { AddCrudComponent } from './crud-processor/add-crud/add-crud.component';
     DashboardComponent,
     RemoveUnderscorePipe,
     CrudProcessorComponent,
-    AddCrudComponent
+    AddCrudComponent,
+    MatCardContentComponent,
+    MatCardHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +71,8 @@ import { AddCrudComponent } from './crud-processor/add-crud/add-crud.component';
     MatSnackBarModule,
     MatTreeModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatRadioModule
      
   ],
   providers: [
