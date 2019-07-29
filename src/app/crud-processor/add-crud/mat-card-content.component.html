@@ -6,8 +6,8 @@
         <div [ngSwitch]="control.controlType">
             <div *ngSwitchCase="'textbox'">
                 <mat-form-field>
-                    <input matInput autocomplete="off" [formControlName]="control.fieldName" [id]="control.fieldName"
-                        [type]="control.type">
+                    <input matInput [formControlName]="control.fieldName" [id]="control.fieldName" [type]="control.type"
+                        autocomplete="off">                  
                 </mat-form-field>
             </div>
             <div *ngSwitchCase="'radio'">
@@ -19,5 +19,7 @@
             </div>
         </div>
     </div>
-    <div class="errorMessage" *ngIf="!isValid">{{control.fieldName|titlecase|removeunderscore}} is required*</div>
+    <mat-error class="errorMessage" *ngIf="!isValid">
+        {{control.fieldName|titlecase|removeunderscore}} is required*
+    </mat-error>
 </div>
