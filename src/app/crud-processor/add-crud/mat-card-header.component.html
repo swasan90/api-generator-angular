@@ -1,5 +1,8 @@
 <mat-card-header class="title">
-    <mat-card-title>Add record</mat-card-title>
+    <mat-card-title *ngIf="!isEdit">Add record</mat-card-title>
+    <mat-card-title *ngIf="isEdit">Edit record</mat-card-title>
     <mat-card-subtitle>Table : {{currentDomain?.domainName|titlecase|removeunderscore}}</mat-card-subtitle>
+    <mat-card-subtitle>Project Name :
+            {{currentDomain?.projectName|titlecase|removeunderscore}}</mat-card-subtitle>
 </mat-card-header>
 <hr />
