@@ -10,15 +10,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CrudProcessorComponent } from './crud-processor/crud-processor.component';
 import { AddCrudComponent } from './crud-processor/add-crud/add-crud.component';
 
-
-
 export const routes: Routes = [
   {
     path: '',
     redirectTo: 'api/dashboard',
     pathMatch: 'full'
   },
-   
+
   {
     path: 'api',
     component: FullLayoutComponent,
@@ -26,14 +24,14 @@ export const routes: Routes = [
       {
         path: 'create_api',
         component: ApiGeneratorComponent
-      } ,
+      },
       {
         path: 'dashboard',
         component: DashboardComponent
       },
       {
         path: 'crud_processor',
-        component: CrudProcessorComponent                  
+        component: CrudProcessorComponent
       },
       {
         path: 'crud_processor/add',
@@ -43,7 +41,7 @@ export const routes: Routes = [
         path: 'crud_processor/edit',
         component: AddCrudComponent
       }
-      
+
     ]
 
   }
