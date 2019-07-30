@@ -53,19 +53,8 @@
     font-family:'Verdana';
   }
 
-  .mat-column-endpoint_name{
-      padding-right:90px;      
-  }
 
-  .mat-column-endpoint_url{
-    padding-right:90px;
-   
-}
-.mat-column-method_type{
-    padding-right:90px;   
-}
-
-.mat-header-cell {
+.header-cell {
     font-size:15px;
     font-weight: 1.2rem;
     color:#00494e;
