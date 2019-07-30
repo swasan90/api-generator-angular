@@ -24,4 +24,8 @@ export class AddCrudService {
     return this.httpClient.post(environment.api_url+"apigenerator/"+projectName+"/"+domainName,formObj);
   }
 
+  public updateRecord(formObj:any,projectName:string,domainName:string,domainId:string):Observable<any>{
+    return this.httpClient.post(environment.api_url+"apigenerator/"+projectName+"/"+domainName+"/"+domainId,formObj);
+  }
+
 }
