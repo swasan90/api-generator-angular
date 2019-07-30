@@ -38,10 +38,12 @@ export const routes: Routes = [
       {
         path: 'crud_processor/add',
         component: AddCrudComponent
+      },
+      {
+        path: 'crud_processor/edit',
+        component: AddCrudComponent
       }
       
-      
-
     ]
 
   }
