@@ -14,17 +14,16 @@ export class MatCardContentComponent implements OnInit {
  
   @Input() control: MetaData<any>;
   @Input() formGroup: FormGroup;
-
+  
   constructor(){}
   /**
    * Function to return if the form is valid
    */
   get isValid() { 
-    return this.formGroup.controls[this.control.fieldName].valid || this.formGroup.controls[this.control.fieldName].untouched ;
+    return this.formGroup.controls[this.control.fieldName].valid 
+    || this.formGroup.controls[this.control.fieldName].untouched ;
   }
 
   ngOnInit() {
   }
-
-  
 }
