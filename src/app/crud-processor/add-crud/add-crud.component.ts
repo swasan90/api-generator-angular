@@ -11,7 +11,7 @@ import { Fields } from 'src/app/model/fields';
 import { AddCrudService } from './add-crud.service';
 import { TextBoxControl } from './control-type/textbox-control';
 import { AnimationKeyframesSequenceMetadata } from '@angular/animations';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-crud',
@@ -28,9 +28,13 @@ export class AddCrudComponent implements OnInit ,ControlValueAccessor{
   addFormGroup:FormGroup;
   currentDomain: ProjectDomain;
   formControls: MetaData<any>[] = [];
+  editFormObj:any={};
+  isEdit:boolean=false;
+  recordId:any={};
 
   constructor(private addCrudService: AddCrudService, 
-    private snackBarService: SnackbarService,private crudService:CrudProcessorService,private router:Router) { }
+    private snackBarService: SnackbarService,private crudService:CrudProcessorService,private router:Router,
+    private route:ActivatedRoute) { }
    
   
   receiveEvent(form:FormGroup){
@@ -38,7 +42,8 @@ export class AddCrudComponent implements OnInit ,ControlValueAccessor{
   }
 
   save(){
-    let formObj = this.addFormGroup.value;
+    let formObj:any={};
+    formObj["attributes"]=this.addFormGroup.value;       
     this.addCrudService.persistRecord(formObj,this.currentDomain.projectName,this.currentDomain.domainName).subscribe(resp=>{
       this.snackBarService.openSnackBar(resp["message"],"Success","custom-success-snackbar");      
       this.router.navigate(["/api/crud_processor"]);
@@ -67,10 +72,35 @@ export class AddCrudComponent implements OnInit ,ControlValueAccessor{
   setDisabledState?(isDisabled: boolean): void {
     isDisabled ? this.addFormGroup.disable() : this.addFormGroup.enable();
   }
+
+  edit(){
+    let formObj:any={};
+    formObj["attributes"]=this.addFormGroup.value;   
+    this.addCrudService.updateRecord(formObj,this.currentDomain.projectName,
+      this.currentDomain.domainName,this.recordId.id).subscribe(data=>{
+      this.snackBarService.openSnackBar(data["message"],"Success","custom-success-snackbar");
+      this.cancel();
+    },error=>{
+      console.log(error);
+      this.snackBarService.openSnackBar(error.error["message"], "Error", "custom-eror-snackbar");
+    });
+
+  }
     
   ngOnInit() {
     this.currentDomain = JSON.parse(localStorage.getItem("currentDomain"));      
-    this.formControls = JSON.parse(localStorage.getItem("formControls"));      
+    this.formControls = JSON.parse(localStorage.getItem("formControl"));  
+    if(this.route.snapshot.url[1].path=="edit"){
+      this.isEdit = true;        
+      this.recordId.id= this.crudService.selectedElement.id;  
+       for(let formControl of this.formControls){
+         for(let key of Object.keys(this.crudService.selectedElement)){        
+          if(formControl.fieldName == key){
+            formControl.value = this.crudService.selectedElement[key];           
+          }
+         }         
+       }          
+    }      
   }
 
 }
