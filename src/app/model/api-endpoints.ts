@@ -1,3 +1,6 @@
+/**
+ * Interface to create api endpoints.
+ */
 export interface ApiEndPoints {
     project_id?: string;
     endpoint_name: string;

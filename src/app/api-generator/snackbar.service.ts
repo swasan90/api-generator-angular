@@ -4,16 +4,19 @@ import { MatSnackBar } from '@angular/material';
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Class to implement snackbar methods.
+ */
 export class SnackbarService {
 
   constructor(private snackBar: MatSnackBar) { }
 
-  openSnackBar(message: string, action: string,className:string) {     
+  openSnackBar(message: string, action: string, className: string) {
     this.snackBar.open(message, action, {
       duration: 1500,
-      verticalPosition :'top',
-      horizontalPosition:'right',
-      panelClass:[className]
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+      panelClass: [className]
     });
   }
 }

@@ -7,22 +7,32 @@ import { Project } from '../model/project';
 })
 export class ApiGeneratorService {
 
-  
   constructor() { }
 
   public projectSource = new BehaviorSubject(this.getProject());
   currentProject = this.projectSource.asObservable();
 
-  getProject(){
+  /**
+   * Function to get project.
+   */
+  getProject() {
     return localStorage.getItem("projectData");
   }
 
-  getCurrentProject(project:Project){
+  /**
+   * Function to get current project.
+   * @param project 
+   */
+  getCurrentProject(project: Project) {
     this.projectSource.next(JSON.stringify(project));
   }
 
-  cleanString(field:string){         
-    var str = field.trim().toLowerCase();     
+  /**
+   * Function to convert to lowercase and replace spaces with underscore.
+   * @param field 
+   */
+  cleanString(field: string) {
+    var str = field.trim().toLowerCase();
     return str.replace(/\s+/g, "_");
   }
 }

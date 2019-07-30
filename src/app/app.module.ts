@@ -1,31 +1,30 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
 //Angular Material modules
-import {CdkStepperModule, STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
-import { MatStepperModule,
-         MatFormFieldModule,
-         MatInputModule,
-         MatButtonModule,
-         MatSelectModule,
-         MatTableModule ,
-         MatSnackBarModule ,
-         MatTreeModule,
-         MatIconModule,
-         MatCardModule,
-         MatRadioModule
-          
-      } 
-from '@angular/material';
+import { CdkStepperModule, STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import {
+  MatStepperModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  MatSelectModule,
+  MatTableModule,
+  MatSnackBarModule,
+  MatTreeModule,
+  MatIconModule,
+  MatCardModule,
+  MatRadioModule
+
+}
+  from '@angular/material';
 
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';  
+import { AppRoutingModule } from './app-routing.module';
 import { FullLayoutComponent } from './layout/full-layout/full-layout.component';
 import { ApiGeneratorComponent } from './api-generator/api-generator.component';
 import { ProjectGeneratorComponent } from './api-generator/project-generator/project-generator.component';
@@ -37,11 +36,11 @@ import { CrudProcessorComponent } from './crud-processor/crud-processor.componen
 import { AddCrudComponent } from './crud-processor/add-crud/add-crud.component';
 import { MatCardContentComponent } from './crud-processor/add-crud/mat-card-content.component';
 import { MatCardHeaderComponent } from './crud-processor/add-crud/mat-card-header.component';
- 
+
 
 @NgModule({
   declarations: [
-    AppComponent,  
+    AppComponent,
     FullLayoutComponent,
     ApiGeneratorComponent,
     ProjectGeneratorComponent,
@@ -58,14 +57,13 @@ import { MatCardHeaderComponent } from './crud-processor/add-crud/mat-card-heade
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule, 
-    BrowserAnimationsModule,
-    FormsModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,     
     CdkStepperModule,
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule ,
+    MatSelectModule,
     MatButtonModule,
     MatTableModule,
     MatSnackBarModule,
@@ -73,13 +71,13 @@ import { MatCardHeaderComponent } from './crud-processor/add-crud/mat-card-heade
     MatIconModule,
     MatCardModule,
     MatRadioModule
-     
+
   ],
   providers: [
     {
-    provide: STEPPER_GLOBAL_OPTIONS,
-    useValue: { showError: true }
-  }],
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { showError: true }
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

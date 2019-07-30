@@ -10,6 +10,9 @@ import { AddCrudService } from './add-crud.service';
   providers: [AddCrudService]
 
 })
+/**
+ * Mat Card content component class.
+ */
 export class MatCardContentComponent implements OnInit {
  
   @Input() control: MetaData<any>;

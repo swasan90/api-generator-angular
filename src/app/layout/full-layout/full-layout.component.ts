@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
- 
 
+/**
+ * Full layout component class.
+ */
 @Component({
   selector: 'app-full-layout',
   templateUrl: './full-layout.component.html',

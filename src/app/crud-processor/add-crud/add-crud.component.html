@@ -1,16 +1,18 @@
 <div class="container-body">
   <mat-card>
-     <app-card-header [childControl]="formControls" [currentDomain]= "currentDomain" (formEvent)="receiveEvent($event)" 
-     [isEdit]="isEdit"></app-card-header>
-     
-    <mat-card-content>       
-        <div *ngFor="let formControl of formControls" >          
-            <app-card-content [control]="formControl" [formGroup]="addFormGroup" ></app-card-content>
-        </div>       
+    <app-card-header [childControl]="formControls" [currentDomain]="currentDomain" (formEvent)="receiveEvent($event)"
+      [isEdit]="isEdit"></app-card-header>
+
+    <mat-card-content>
+      <div *ngFor="let formControl of formControls">
+        <app-card-content [control]="formControl" [formGroup]="addFormGroup"></app-card-content>
+      </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="accent" [disabled]="!addFormGroup.valid" *ngIf="!isEdit" (click)="save()">Save</button>
-      <button mat-raised-button color="accent" [disabled]="!addFormGroup.valid" *ngIf="isEdit" (click)="edit()">Edit</button>
+      <button mat-raised-button color="accent" [disabled]="!addFormGroup.valid" *ngIf="!isEdit"
+        (click)="save()">Save</button>
+      <button mat-raised-button color="accent" [disabled]="!addFormGroup.valid" *ngIf="isEdit"
+        (click)="edit()">Edit</button>
       <button mat-raised-button (click)="cancel()">Cancel</button>
     </mat-card-actions>
   </mat-card>

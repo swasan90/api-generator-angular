@@ -19,27 +19,28 @@ import { ApiListGeneratorService } from '../api-list-generator/api-list-generato
     }
   ]
 })
+/**
+ * Component class for domain field generator.
+ */
 export class DomainFieldGeneratorComponent implements OnInit, ControlValueAccessor {
-
   isEditable = false;
   domainFieldsForm: FormGroup;
-
   fieldTypes: FieldType[] = [
     { value: "number", viewValue: "Number" },
     { value: "text", viewValue: "Text" },
     { value: "boolean", viewValue: "Boolean" }
   ];
-
   currentproject: Project;
-
   projectName: string;
   domainName: string;
   projectId: string;
-
+  @Input() stepper:MatStepper; 
   constructor(private _fb: FormBuilder, private apiGeneratorService: ApiGeneratorService,
     private domainFieldService: DomainFieldGeneratorService, private snackBar: SnackbarService) { }
 
-  @Input() stepper:MatStepper; 
+  /**
+   * Implementing Control value accessor.
+   */
 
   public onTouched: () => void = () => { };
 
@@ -57,6 +58,10 @@ export class DomainFieldGeneratorComponent implements OnInit, ControlValueAccess
     isDisabled ? this.domainFieldsForm.disable() : this.domainFieldsForm.enable();
   }
 
+  /**
+   * Function to save domain fields.
+   * @param index 
+   */
   submitDomainFields(index:number) {
     let domainFieldObj: any = {};
     domainFieldObj = this.domainFieldsForm.value;
@@ -72,27 +77,45 @@ export class DomainFieldGeneratorComponent implements OnInit, ControlValueAccess
     });
   }
 
+  /**
+   * Function to create form group.
+   */
   createAttributeGroups() {
     return this._fb.group({
       fieldName: new FormControl("", [Validators.required]),
       fieldType: new FormControl("", [Validators.required])
     });
   }
-
+  /**
+   * Function to add new form control dynamically.
+   */
   add() {
     (<FormArray>this.domainFieldsForm.get('fields')).push(this.createAttributeGroups());
 
   }
 
+  /**
+   * Function to get fields array.
+   */
   get fields(): FormArray {
     return this.domainFieldsForm.get('fields') as FormArray;
   }
 
+  /**
+   * Function to format string on the input control.
+   * @param fieldVal 
+   * @param event 
+   * @param index 
+   */
   formatString(fieldVal: string, event: any, index: number) {
     const controlArray = <FormArray>this.domainFieldsForm.get('fields');
     controlArray.controls[index].get('fieldName').setValue(this.apiGeneratorService.cleanString(fieldVal));
   }
 
+  /**
+   * Function to remove the form control.
+   * @param index 
+   */
   remove(index:number){  
      (<FormArray>this.domainFieldsForm.get('fields')).removeAt(index);    
   }
@@ -106,9 +129,5 @@ export class DomainFieldGeneratorComponent implements OnInit, ControlValueAccess
     this.apiGeneratorService.currentProject.subscribe(project => {
       this.currentproject = JSON.parse(project);      
     });
-
   }
-
-
-
 }

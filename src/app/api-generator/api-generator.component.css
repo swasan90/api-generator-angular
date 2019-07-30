@@ -1,70 +1,66 @@
- 
-.divider{
-    width:30px;
-    height:auto;
-    display:inline-block;
-}
-.parent {
-    display: flex;
-    justify-content: center;    
-    flex-direction: column;
-    padding:50px;
-  }
+ .divider {
+   width: 30px;
+   height: auto;
+   display: inline-block;
+ }
 
-  .mat-label{
-    display: inline-block;
-    margin-bottom: .50rem;
-    clear: left;
-    padding-right: 40px; 
-    color:#58427C;
-    font-style:bold;
-    font-weight: 600;
-  }
+ .parent {
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   padding: 50px;
+ }
 
- .mat-para{
-    padding:20px;
-    justify-content: center;   
-    flex-direction: column;
-  }
+ .mat-label {
+   display: inline-block;
+   margin-bottom: .50rem;
+   clear: left;
+   padding-right: 40px;
+   color: #58427C;
+   font-style: bold;
+   font-weight: 600;
+ }
 
-  h4{
-    display: flex;
-    justify-content: center;    
-    flex-direction: column;
-    padding:50px;
-    text-align: center;
-    color:#1c5680;
-    font-weight: 5rem; 
-  }
+ .mat-para {
+   padding: 20px;
+   justify-content: center;
+   flex-direction: column;
+ }
 
-  mat-table {
-    width: 85%;    
-    background: #e8e3e5;  
-    margin-top:20px;
-  }
+ h4 {
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   padding: 50px;
+   text-align: center;
+   color: #1c5680;
+   font-weight: 5rem;
+ }
 
-  .mat-text{
-    display: inline-block;
-    margin-bottom: .50rem;
-    clear: left;
-    padding-right: 40px;
-    color:#C63678;
-    font-weight: 1.2rem;
-    font-family:'Verdana';
-  }
+ mat-table {
+   width: 85%;
+   background: #e8e3e5;
+   margin-top: 20px;
+ }
 
+ .mat-text {
+   display: inline-block;
+   margin-bottom: .50rem;
+   clear: left;
+   padding-right: 40px;
+   color: #C63678;
+   font-weight: 1.2rem;
+   font-family: 'Verdana';
+ }
 
-.header-cell {
-    font-size:15px;
-    font-weight: 1.2rem;
-    color:#00494e;
-    font-family:'Verdana';
-}
+ .header-cell {
+   font-size: 15px;
+   font-weight: 1.2rem;
+   color: #00494e;
+   font-family: 'Verdana';
+ }
 
-.custom-fab-button{
-  background-color:#264d7e;
-  color:#f5e7a1	;
-}
-
- 
-
+ .custom-fab-button {
+   background-color: #264d7e;
+   color: #f5e7a1;
+ }

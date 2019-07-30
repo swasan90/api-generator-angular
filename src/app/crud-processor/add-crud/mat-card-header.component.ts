@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input }       from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CrudProcessorService } from '../crud-processor.service';
 import { ProjectDomain } from 'src/app/model/projectDomain';
 import { Fields } from 'src/app/model/fields';
@@ -12,22 +12,26 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-card-header',
   templateUrl: './mat-card-header.component.html',
-  providers:  [CrudProcessorService],
+  providers: [CrudProcessorService],
   styleUrls: ['./add-crud.component.css'],
 })
-export class MatCardHeaderComponent implements OnInit{
 
-  @Input() childControl:MetaData<any>[];
-  @Input() currentDomain:ProjectDomain;   
-  form:FormGroup;
-  @Input() isEdit:boolean;
-  
+/**
+ * Mat card header component class.
+ */
+export class MatCardHeaderComponent implements OnInit {
+
+  @Input() childControl: MetaData<any>[];
+  @Input() currentDomain: ProjectDomain;
+  form: FormGroup;
+  @Input() isEdit: boolean;
+
   @Output() formEvent = new EventEmitter<FormGroup>();
-  constructor(private addCrudService: AddCrudService, private snackBarService: SnackbarService,private crudService:CrudProcessorService) {
-      
+  constructor(private addCrudService: AddCrudService, private snackBarService: SnackbarService, private crudService: CrudProcessorService) {
+
   }
-  ngOnInit() {     
+  ngOnInit() {
     this.form = this.addCrudService.toFormGroup(this.childControl);
-    this.formEvent.emit(this.form);     
- }
+    this.formEvent.emit(this.form);
+  }
 }

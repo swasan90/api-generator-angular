@@ -13,17 +13,19 @@ import { CdkStep } from '@angular/cdk/stepper';
   styleUrls: ['./api-generator.component.css']
 })
 
-
+/**
+ * Component class for api generator.
+ */
 export class ApiGeneratorComponent implements OnInit {
+
   domainFieldGenerator: FormGroup;
   projectDomainGenerator: FormGroup;
   isEditable = false;
   isCompleted :boolean = false;
   @ViewChild('stepper') matStepper:MatStepper;  
+
   constructor(private _fb: FormBuilder) { }
 
-   
-   
   ngOnInit() {
     this.projectDomainGenerator = this._fb.group({
       projectInfo: new FormControl("")     

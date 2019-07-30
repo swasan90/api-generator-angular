@@ -12,43 +12,50 @@ import { MatStepper } from '@angular/material';
   templateUrl: './api-list-generator.component.html',
   styleUrls: ['../api-generator.component.css']
 })
-export class ApiListGeneratorComponent implements OnInit  {
-   
-  @Input() stepper:MatStepper;
+/**
+ * Component class for api list generator.
+ */
+export class ApiListGeneratorComponent implements OnInit {
 
-  @Input() projectFormGroup:FormGroup;
-
+  @Input() stepper: MatStepper;
+  @Input() projectFormGroup: FormGroup;
   endPointsData: ApiEndPoints[] = [];
-  // displayedColumnHeaders: string[] = ['Endpoint Name', 'Endpoint Url', 'Method Type'];
   displayedColumns: string[] = ['endpoint_name', 'endpoint_url', 'method_type'];
-  
   currentProject: Project;
   constructor(private apiGeneratorService: ApiGeneratorService, private apiListService: ApiListGeneratorService,
     private snackBar: SnackbarService) { }
 
-
-  getApiEndPoints() {     
-    this.apiListService.getApiEndpointsForProject(this.currentProject.id).subscribe(data => {       
+  /**
+   * Function to get api endpoints.
+   */
+  getApiEndPoints() {
+    this.apiListService.getApiEndpointsForProject(this.currentProject.id).subscribe(data => {
       this.endPointsData = data["data"];
       this.snackBar.openSnackBar("Successfully created table:" + this.currentProject.domainName, "Success", "custom-success-snackbar");
-    }, error => {     
+    }, error => {
       this.snackBar.openSnackBar("Unable to create table :" + this.currentProject.domainName, "Error", "custom-error-snackbar");
     });
   }
 
-  init() {
+  /**
+   * Function to get current project
+   */
+  getCurrentProject() {
     this.apiGeneratorService.currentProject.subscribe(project => {
       this.currentProject = JSON.parse(project);
     });
   }
 
-  reset(){
-    this.stepper.reset();    
+  /**
+   * Function to reset mat stepper.
+   */
+  reset() {
+    this.stepper.reset();
     this.projectFormGroup.reset();
   }
 
   ngOnInit() {
-    this.init();
+    this.getCurrentProject();
     this.getApiEndPoints();
   }
 

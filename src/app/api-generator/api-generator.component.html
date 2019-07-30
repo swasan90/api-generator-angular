@@ -1,7 +1,7 @@
 <h4>Create your API</h4>
-<mat-horizontal-stepper linear labelPosition="bottom"  #stepper>
+<mat-horizontal-stepper linear labelPosition="bottom" #stepper>
   <!-- Step:1 Create project and domain name -->
-  <mat-step [editable]="isEditable" [completed] = "isCompleted" #step1>
+  <mat-step [editable]="isEditable" [completed]="isCompleted" #step1>
     <form *ngIf="stepper.selected ==null||stepper.selected==step1" [formGroup]="projectDomainGenerator" class="parent">
       <ng-template matStepLabel>Create Project & Domain</ng-template>
       <app-project-generator [stepper]=matStepper formControlName="projectInfo"></app-project-generator>
@@ -9,7 +9,7 @@
   </mat-step>
 
   <!-- Step:2 Create Field names and field types for the created domain -->
-  <mat-step  [editable]="isEditable"  [completed] = "isCompleted" #step2>
+  <mat-step [editable]="isEditable" [completed]="isCompleted" #step2>
     <form *ngIf="stepper.selected==step2" [formGroup]="domainFieldGenerator" class="parent">
       <ng-template matStepLabel>Add your domain fields</ng-template>
       <app-domain-field-generator [stepper]=matStepper formControlName="domainFieldInfo"></app-domain-field-generator>
@@ -17,9 +17,10 @@
   </mat-step>
 
   <!-- Step:3 Status of the step- provides you the api endpoint list -->
-  <mat-step  [editable]="!isEditable" [completed] = "isCompleted" #step3>
+  <mat-step [editable]="!isEditable" [completed]="isCompleted" #step3>
     <ng-template matStepLabel>Status</ng-template>
-    <app-api-list-generator [stepper]=matStepper [projectFormGroup]= projectDomainGenerator *ngIf="stepper.selected==step3"></app-api-list-generator>
+    <app-api-list-generator [stepper]=matStepper [projectFormGroup]=projectDomainGenerator
+      *ngIf="stepper.selected==step3"></app-api-list-generator>
   </mat-step>
 
 </mat-horizontal-stepper>

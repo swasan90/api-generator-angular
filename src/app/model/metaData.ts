@@ -1,3 +1,6 @@
+/**
+ * Class for metadata object.
+ */
 export class MetaData<T>{
     value: T;
     fieldName:string;     
