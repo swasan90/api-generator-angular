@@ -1,12 +1,11 @@
 .container-body{
-    padding:80px;   
-    
+    padding:80px;    
 }
 
-.crud-tab-icon {
-    margin-right: 8px;
-  }
-
+table {
+  width: 100%;
+}
+ 
   .project-label {
     display: flex;
     justify-content: center;    
@@ -34,6 +33,34 @@
     text-align: center;
     justify-content: center;
   }
+ 
+ 
+
+.header-cell{
+  font-size:15px;
+  font-weight: 1.5rem;
+  color:#f8e9fe	;
+  font-family:'Verdana';
+}
+
+.header-row{
+  background:#de6fa1;
+}  
+
+.custom-flat-button{   
+   float: right;
+   margin-bottom:10px;
+}
+
+.fas-icon-del{
+  color:#ff424e;
+}
+
+.fas-icon-edit{
+  color:#7e9f2e;
+}
+
+ 
 
   
 
