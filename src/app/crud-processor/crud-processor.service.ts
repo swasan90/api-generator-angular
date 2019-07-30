@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { FieldType } from 'src/app/model/fieldType';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -32,13 +33,14 @@ export class CrudProcessorService {
    */
   public buildSchemaArray() {
     let domain = JSON.parse(localStorage.getItem("currentDomain"));
+    this.formControls = new Array();
     this.httpClient.get(environment.api_url + "getSchemaMapping/" + domain.id).subscribe(data => {
       let schema = data["data"];
       for (let item of schema) {
-        let controlObj = this.getControlType(item);         
+        let controlObj = this.getControlType(item);   
         this.formControls.push(controlObj);
-      }
-      localStorage.setItem("formControls", JSON.stringify(this.formControls));
+      }  
+      localStorage.setItem("formControl",JSON.stringify(this.formControls));   
     }, error => {
       console.log(error);
     })
@@ -60,7 +62,7 @@ export class CrudProcessorService {
     return new TextBoxControl({
       fieldName: item.fieldName,
       fieldType: item.fieldType,
-      required:true
+      //required:true
     });
   }
 
@@ -76,6 +78,10 @@ export class CrudProcessorService {
     });
   }
 
-   
+  selectedElement:any={};
+  public setSelectedElement(element:any){
+    this.selectedElement = element;
+    return this.selectedElement;
+  }
 
 }
