@@ -20,13 +20,14 @@ export class MatCardHeaderComponent implements OnInit{
   @Input() childControl:MetaData<any>[];
   @Input() currentDomain:ProjectDomain;   
   form:FormGroup;
-
+  @Input() isEdit:boolean;
+  
   @Output() formEvent = new EventEmitter<FormGroup>();
   constructor(private addCrudService: AddCrudService, private snackBarService: SnackbarService,private crudService:CrudProcessorService) {
       
   }
   ngOnInit() {     
     this.form = this.addCrudService.toFormGroup(this.childControl);
-    this.formEvent.emit(this.form);
+    this.formEvent.emit(this.form);     
  }
 }
