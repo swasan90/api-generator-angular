@@ -91,7 +91,7 @@ export class CrudProcessorService {
     return new TextBoxControl({
       fieldName: item.fieldName,
       fieldType: item.fieldType,
-      //required:true
+      required:true
     });
   }
 
