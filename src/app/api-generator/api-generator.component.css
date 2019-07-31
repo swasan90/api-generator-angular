@@ -37,9 +37,9 @@
    font-weight: 5rem;
  }
 
- mat-table {
-   width: 85%;
-   background: #e8e3e5;
+ table {
+   width: 100%;
+   background: #EED9C4;
    margin-top: 20px;
  }
 
