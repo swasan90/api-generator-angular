@@ -9,24 +9,28 @@ import { ApiGeneratorComponent } from './api-generator/api-generator.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CrudProcessorComponent } from './crud-processor/crud-processor.component';
 import { AddCrudComponent } from './crud-processor/add-crud/add-crud.component';
-
+import { LogoutComponent } from './auth/logout.component';
+import { AuthGuard } from './auth/auth-guard';
+import { NotFoundComponent } from './not-found/not-found.component';
+ 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'api/dashboard',
+    redirectTo: 'api/dashboard/:id',
     pathMatch: 'full'
   },
 
   {
     path: 'api',
     component: FullLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'create_api',
         component: ApiGeneratorComponent
       },
       {
-        path: 'dashboard',
+        path: 'dashboard/:id',
         component: DashboardComponent
       },
       {
@@ -40,10 +44,25 @@ export const routes: Routes = [
       {
         path: 'crud_processor/edit',
         component: AddCrudComponent
-      }
+      }       
 
     ]
 
+  },
+  {
+    path:'auth',
+    component:FullLayoutComponent,
+    canActivate: [AuthGuard],
+    children:[
+      {
+        path:'logout',
+        component:LogoutComponent
+      }
+    ]
+  },
+  {
+    path:'NotFound',
+    component:NotFoundComponent,   
   }
 ];
 
