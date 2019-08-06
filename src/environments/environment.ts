@@ -5,6 +5,8 @@
 export const environment = {
   production: false,
   api_url: "http://localhost:8080/",
+  secret_key_uuid:"sECRETkEyuuid",
+  redis_url:"http://localhost:8081/"
 };
 
 /*
