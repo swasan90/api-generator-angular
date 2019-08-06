@@ -10,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FullLayoutComponent implements OnInit {
 
+  encodeduuid:string;
   constructor() { }
 
   ngOnInit() {
+    this.encodeduuid = localStorage.getItem("encodeUri");    
   }
 
 }
