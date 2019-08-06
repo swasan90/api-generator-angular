@@ -5,7 +5,7 @@ import { DashboardData } from '../model/dashboard-data';
 import { ProjectDomain } from '../model/projectDomain';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { NestedTreeControl } from '@angular/cdk/tree';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +16,8 @@ export class DashboardComponent implements OnInit {
 
   treeControl = new NestedTreeControl<DashboardData>(node => node.children);
   dataSource = new MatTreeNestedDataSource<DashboardData>();
-  constructor(private dashboardService: DashboardService, private snackbarService: SnackbarService, private route: Router) { }
+  constructor(private dashboardService: DashboardService, private snackbarService: SnackbarService, private route: Router,
+    private router:ActivatedRoute) { }
 
   hasChild = (_: number, node: DashboardData) => !!node.children && node.children.length > 0;
 
