@@ -6,6 +6,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 
@@ -14,16 +15,16 @@ import { catchError } from 'rxjs/operators';
  */
 export class ErrorInterceptor implements HttpInterceptor {
   error: string;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,private router:Router) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(catchError(err => {
       let error = "";
-      if (err.status == 401) {
-        //this.authService.logout();
+      if (err.status == 401) {        
         error = err.error.message;
       } else if (err.status == 403) {
-        error = "Invalid credentials.Please provide valid credentials";
+        console.log("in 403");
+        this.router.navigate(['auth/logout']);
       } else {
         if (err.error["errors"]) {          
           let errorObj = err.error["errors"];
