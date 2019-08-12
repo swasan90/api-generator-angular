@@ -20,10 +20,10 @@ export class AddCrudService {
    */ 
    toFormGroup(formControls: MetaData<any>[]) {  
     let group: any = {};      
-    formControls.forEach(formControl=>{      
-      group[formControl.fieldName] = formControl.required ? new FormControl(formControl.value || '', Validators.required)
+    formControls.forEach(formControl=>{            
+      group[formControl.fieldName] = formControl.required ? new FormControl(formControl.value, Validators.required)
                                               : new FormControl(formControl.value || '');
-    });   
+    });        
     return new FormGroup(group);
   }
 
