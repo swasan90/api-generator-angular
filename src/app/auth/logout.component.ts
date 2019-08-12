@@ -23,20 +23,17 @@ export class LogoutComponent implements OnInit {
    * Function to implement logout method
    */
   logout() {
-    let user_id = localStorage.getItem("uuid");
-    this.logoutService.deleteRedisToken(user_id).subscribe(data=>{
-        if(data){
-            localStorage.setItem("uuid",null);
-            localStorage.setItem("encodeUri",null);
-            localStorage.setItem("jwtToken",null);
-            this.authService.currentUserSubject.next(null);
-            localStorage.setItem("currentUser",null);
-            window.open("http://localhost:4200/home/auth/logout","_self");
-        }
+    let user_id = localStorage.getItem("uuid");     
+    this.logoutService.deleteRedisToken(user_id).subscribe(data=>{        
+      localStorage.setItem("uuid",null);
+      localStorage.setItem("encodeUri",null);
+      localStorage.setItem("jwtToken",null);
+      this.authService.currentUserSubject.next(null);
+      localStorage.setItem("currentUser",null); 
     },error=>{
         this.snackbarService.openSnackBar(error.error["message"], "Error", "custom-eror-snackbar");
     });
-     
+    window.location.href= "http://localhost:4200/home/auth/logout"
   }
   ngOnInit() {
     this.logout();
