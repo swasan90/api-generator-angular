@@ -1,16 +1,13 @@
 import { CrudProcessorService } from './../crud-processor.service';
-import { FieldType } from './../../model/fieldType';
 import { MetaData } from './../../model/metaData';
-import { FormBuilder, FormGroup, FormControl, FormArray, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormGroup, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { SnackbarService } from './../../api-generator/snackbar.service';
 import { ProjectDomain } from 'src/app/model/projectDomain';
-import { Component, OnInit, Input, SystemJsNgModuleLoader, forwardRef, ViewChild, AfterViewInit } from '@angular/core';
-import { CdkColumnDef } from '@angular/cdk/table';
-import { Fields } from 'src/app/model/fields';
+import { Component, OnInit,forwardRef } from '@angular/core';
+ 
 import { AddCrudService } from './add-crud.service';
-import { TextBoxControl } from './control-type/textbox-control';
-import { AnimationKeyframesSequenceMetadata } from '@angular/animations';
+ 
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -90,7 +87,7 @@ export class AddCrudComponent implements OnInit, ControlValueAccessor {
    */
   edit() {
     let formObj: any = {};
-    formObj["attributes"] = this.addFormGroup.value;
+    formObj["attributes"] = this.addFormGroup.value;     
     this.addCrudService.updateRecord(formObj, this.currentDomain.projectName,
       this.currentDomain.domainName, this.recordId.id).subscribe(data => {
         this.snackBarService.openSnackBar(data["message"], "Success", "custom-success-snackbar");
@@ -111,7 +108,7 @@ export class AddCrudComponent implements OnInit, ControlValueAccessor {
       for (let formControl of this.formControls) {
         for (let key of Object.keys(this.crudService.selectedElement)) {
           if (formControl.fieldName == key) {
-            formControl.value = this.crudService.selectedElement[key];
+            formControl.value = this.crudService.selectedElement[key];            
           }
         }
       }
