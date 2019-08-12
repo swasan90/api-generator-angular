@@ -1,3 +1,5 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthService } from './auth/auth.service';
 /**
  * @author Swathy Santhoshkumar
  */
@@ -10,19 +12,18 @@ import { Observable } from 'rxjs';
 /**
  * Class to implement interceptor to pass the jwt token on authorization header for every request.
  */
-export class JwtInterceptor implements HttpInterceptor {
-    constructor() { }
-
+export class JwtTokenInterceptor implements HttpInterceptor { 
+    constructor(private authService:AuthService,private jwtService:JwtHelperService){}   
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        // add authorization header with jwt token if available        
-        let token =JSON.parse(localStorage.getItem("jwtToken"));
-        console.log(token);
-        console.log(request.url);
-        request = request.clone({
+        // add authorization header with jwt token if available   
+        let token = this.authService.getToken();         
+        if(token !=null && !this.jwtService.isTokenExpired()){
+          request = request.clone({
             setHeaders: {
               Authorization: `Bearer ${token}`
             }
           });
+        }       
 
         return next.handle(request);        
     }
