@@ -26,12 +26,7 @@ export class DashboardService {
   /**
    * Function to list all projects.
    */
-  public listAllProjects(): Observable<any> {
-    // let token = JSON.parse(localStorage.getItem("jwtToken"));
-    //  let header = {
-    //         headers: new HttpHeaders()
-    //           .set('Authorization',  `Bearer ${token}`)
-    //       }
+  public listAllProjects(): Observable<any> {   
     return this.httpClient.get(environment.api_url + "getProjectList");
   }
 
