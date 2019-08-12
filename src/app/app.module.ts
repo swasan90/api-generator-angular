@@ -38,9 +38,10 @@ import { MatCardContentComponent } from './crud-processor/add-crud/mat-card-cont
 import { MatCardHeaderComponent } from './crud-processor/add-crud/mat-card-header.component';
 import { StartUpService, startupServiceFactory } from './startup-service'; 
 import { LogoutComponent } from './auth/logout.component';
-import { JwtModule, JwtInterceptor } from '@auth0/angular-jwt';
+import { JwtModule } from '@auth0/angular-jwt';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ErrorInterceptor } from './errorHandlers/error.interceptor';
+import { JwtTokenInterceptor } from './jwt-interceptor';
  
 
 export function tokenGetter() {
@@ -93,8 +94,7 @@ export function tokenGetter() {
     HttpClientModule
 
   ],
-  providers: [       
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor,multi: true },
+  providers: [     
     StartUpService,
     {
       //provider for App Initializer
@@ -103,11 +103,16 @@ export function tokenGetter() {
       deps:[StartUpService],
       multi:true,
     },
+    { provide: HTTP_INTERCEPTORS, 
+      useClass: JwtTokenInterceptor,
+      multi: true },
     {
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { showError: true }
     },    
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, 
+      useClass: ErrorInterceptor,
+       multi: true },
    ],
   bootstrap: [AppComponent]
 })
