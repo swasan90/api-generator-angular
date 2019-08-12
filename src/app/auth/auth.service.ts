@@ -45,7 +45,12 @@ export class AuthService {
    * Function to return if the user is logged in or not.
    */
   public get loggedIn(): boolean {    
-    return localStorage.getItem('jwtToken') !=null;
+    return localStorage.getItem('token') !=null;
+  }
+
+  public getToken():string{
+    console.log(localStorage.getItem("token"));
+    return localStorage.getItem("token");
   }
 
 

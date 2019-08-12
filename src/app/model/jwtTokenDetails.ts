@@ -1,4 +1,5 @@
 export interface jwtTokenDetails{
+    token: string;    
     sub:string,
     email_verified:boolean,
     given_name:string,

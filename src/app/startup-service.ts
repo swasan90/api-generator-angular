@@ -1,16 +1,12 @@
 import { JwtToken } from './model/jwtToken';
 
 import { catchError } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
-import { Injectable, ApplicationRef, Injector } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-
 import * as CryptoJS from 'crypto-js';
-import { Observable } from 'rxjs';
-import { reject, resolve } from 'q';
-import { ActivatedRoute } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthService } from './auth/auth.service';
 /// <reference types="crypto-js" />
@@ -23,7 +19,7 @@ export function startupServiceFactory(startupService: StartUpService): Function 
 export class StartUpService {
 
     private _startupData: any;
-    public jwtToken: JwtToken;
+    public jwtTokenObj: JwtToken;
     private uuid: string;
 
     constructor(private httpClient: HttpClient, private jwtHelper: JwtHelperService, private authService: AuthService) { }
@@ -35,11 +31,11 @@ export class StartUpService {
     async load() {
         this._startupData = null;
         this.getId();
-        let uuid = localStorage.getItem("uuid");
+        let uuid = localStorage.getItem("uuid");   
         const data = await this.httpClient.get(environment.redis_url + "getToken/" + uuid).pipe(map((res: any) => {
             if (!this.jwtHelper.isTokenExpired(JSON.stringify(res.tokenObj.jwtToken))) {
-                this.jwtToken = res["tokenObj"];
-                localStorage.setItem("jwtToken", JSON.stringify(this.jwtToken));
+                this.jwtTokenObj= res["tokenObj"];
+                localStorage.setItem("jwtToken", JSON.stringify(this.jwtTokenObj.jwtToken));
                 localStorage.setItem("currentUser", JSON.stringify(this.jwtHelper.decodeToken(
                     JSON.stringify(res.tokenObj.jwtToken))));
                 this.authService.currentUserSubject.next(this.authService.getUser());
@@ -48,7 +44,6 @@ export class StartUpService {
             .toPromise();
         return this._startupData = data;
     }
-
 
     getId() {
         const path = new URL(window.location.href).pathname;

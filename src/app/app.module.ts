@@ -1,8 +1,8 @@
-import { NgModule, APP_INITIALIZER, Injector, ApplicationRef } from '@angular/core';
+import { HTTP_INTERCEPTORS,HttpClientModule } from '@angular/common/http';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
 
 //Angular Material modules
 import { CdkStepperModule, STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
@@ -38,8 +38,10 @@ import { MatCardContentComponent } from './crud-processor/add-crud/mat-card-cont
 import { MatCardHeaderComponent } from './crud-processor/add-crud/mat-card-header.component';
 import { StartUpService, startupServiceFactory } from './startup-service'; 
 import { LogoutComponent } from './auth/logout.component';
-import { JwtModule } from '@auth0/angular-jwt';
+import { JwtModule, JwtInterceptor } from '@auth0/angular-jwt';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ErrorInterceptor } from './errorHandlers/error.interceptor';
+ 
 
 export function tokenGetter() {
   return localStorage.getItem('jwtToken');
@@ -65,8 +67,7 @@ export function tokenGetter() {
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
-    HttpClientModule,
+    ReactiveFormsModule,    
     AppRoutingModule,
     BrowserAnimationsModule,     
     CdkStepperModule,
@@ -84,12 +85,16 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ['http://localhost:8081/',"http://localhost:8080/"],
+        whitelistedDomains: ["http://localhost:8080/","http://localhost:8081/"],
+        skipWhenExpired:true,
+        throwNoTokenError: true,         
       }
-    })
+    }),
+    HttpClientModule
 
   ],
-  providers: [    
+  providers: [       
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor,multi: true },
     StartUpService,
     {
       //provider for App Initializer
@@ -101,7 +106,8 @@ export function tokenGetter() {
     {
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { showError: true }
-    },
+    },    
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
    ],
   bootstrap: [AppComponent]
 })

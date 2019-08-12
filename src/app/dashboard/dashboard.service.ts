@@ -1,8 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from './../auth/auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProjectDomain } from '../model/projectDomain';
 import { environment } from 'src/environments/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtToken } from '../model/jwtToken';
+import * as CryptoJS from 'crypto-js';
+import { map } from 'rxjs/operators';
+/// <reference types="crypto-js" />
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +18,20 @@ import { environment } from 'src/environments/environment';
  */
 export class DashboardService {
 
-  public selectedDomain: ProjectDomain
-  constructor(private httpClient: HttpClient) { }
-
+  public selectedDomain: ProjectDomain;   
+  constructor(private httpClient: HttpClient) { 
+    
+  }
+   
   /**
    * Function to list all projects.
    */
   public listAllProjects(): Observable<any> {
+    // let token = JSON.parse(localStorage.getItem("jwtToken"));
+    //  let header = {
+    //         headers: new HttpHeaders()
+    //           .set('Authorization',  `Bearer ${token}`)
+    //       }
     return this.httpClient.get(environment.api_url + "getProjectList");
   }
 
@@ -37,4 +50,7 @@ export class DashboardService {
   public getSelectedDomainForCrudOps() {
     return JSON.parse(localStorage.getItem("currentDomain"));
   }
+ 
+
+ 
 }

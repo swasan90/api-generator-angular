@@ -6,6 +6,7 @@ import { ProjectDomain } from '../model/projectDomain';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { Router, ActivatedRoute } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-dashboard',
@@ -42,8 +43,8 @@ export class DashboardComponent implements OnInit {
     this.route.navigate(["/api/crud_processor"]);
   }
 
-  ngOnInit() {
-    this.getAllProjects();
+  ngOnInit() {    
+    this.getAllProjects();         
   }
 
 }
