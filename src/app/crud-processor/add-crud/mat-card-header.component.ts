@@ -1,8 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CrudProcessorService } from '../crud-processor.service';
-import { ProjectDomain } from 'src/app/model/projectDomain';
-import { Fields } from 'src/app/model/fields';
-import { TextBoxControl } from './control-type/textbox-control';
+import { ProjectDomain } from 'src/app/model/projectDomain'; 
 import { SnackbarService } from 'src/app/api-generator/snackbar.service';
 import { AddCrudService } from './add-crud.service';
 import { MetaData } from 'src/app/model/metaData';
@@ -31,7 +29,7 @@ export class MatCardHeaderComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.form = this.addCrudService.toFormGroup(this.childControl);
+    this.form = this.addCrudService.toFormGroup(this.childControl);     
     this.formEvent.emit(this.form);
   }
 }
