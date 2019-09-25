@@ -12,7 +12,7 @@
     <button mat-mini-fab color="primary" (click)="add()"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></button>
   </div>
   <div formArrayName="fields">
-    <div *ngFor="let item of domainFieldsForm.get('fields').controls; let i=index;" [formGroup]="item">
+    <div *ngFor="let item of domainFieldsForm.get('fields')?.controls; let i=index;" [formGroup]="item">
       <!-- Form control for the field name -->
       <div>
         <mat-form-field>
