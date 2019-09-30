@@ -42,6 +42,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ErrorInterceptor } from './errorHandlers/error.interceptor';
 import { JwtTokenInterceptor } from './jwt-interceptor';
+import { environment } from 'src/environments/environment';
  
 
 export function tokenGetter() {
@@ -86,7 +87,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ["http://localhost:8080/","http://localhost:8081/"],
+        whitelistedDomains: [environment.api_url,environment.redis_url],
         skipWhenExpired:true,
         throwNoTokenError: true,         
       }
