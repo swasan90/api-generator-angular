@@ -28,8 +28,7 @@ export class DashboardComponent implements OnInit {
   getAllProjects() {
     this.dashboardService.listAllProjects().subscribe(res => {
       this.dataSource.data = res["dataSet"];
-    }, error => {
-      console.log(error);
+    }, error => {       
       this.snackbarService.openSnackBar(error.error["message"], "Error", "custom-eror-snackbar");
     });
   }
