@@ -31,8 +31,7 @@ export class StartUpService {
     async load() {
         this._startupData = null;
         this.getId();
-        let uuid = localStorage.getItem("uuid");  
-        console.log(uuid); 
+        let uuid = localStorage.getItem("uuid");          
         const data = await this.httpClient.get(environment.redis_url + "getToken/" + uuid).pipe(map((res: any) => {
             if (!this.jwtHelper.isTokenExpired(JSON.stringify(res.tokenObj.jwtToken))) {
                 this.jwtTokenObj= res["tokenObj"];
