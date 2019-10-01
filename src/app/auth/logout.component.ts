@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
  */
 import { Component, OnInit } from '@angular/core';
 import { SnackbarService } from '../api-generator/snackbar.service';
+import { environment } from 'src/environments/environment';
  
 
 @Component({
@@ -33,7 +34,7 @@ export class LogoutComponent implements OnInit {
     },error=>{
         this.snackbarService.openSnackBar(error.error["message"], "Error", "custom-eror-snackbar");
     });
-    window.location.href= "http://localhost:4200/home/auth/logout"
+    window.location.href= environment.auth_url+"/home/auth/logout"
   }
   ngOnInit() {
     this.logout();
