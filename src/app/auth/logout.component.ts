@@ -34,7 +34,7 @@ export class LogoutComponent implements OnInit {
     },error=>{
         this.snackbarService.openSnackBar(error.error["message"], "Error", "custom-eror-snackbar");
     });
-    window.location.href= environment.auth_url+"/home/auth/logout"
+    window.location.href= environment.auth_url+"home/auth/logout"
   }
   ngOnInit() {
     this.logout();
