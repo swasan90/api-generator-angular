@@ -12,6 +12,7 @@ import { AddCrudComponent } from './crud-processor/add-crud/add-crud.component';
 import { LogoutComponent } from './auth/logout.component';
 import { AuthGuard } from './auth/auth-guard';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
  
 export const routes: Routes = [
   {
@@ -57,6 +58,16 @@ export const routes: Routes = [
       {
         path:'logout',
         component:LogoutComponent
+      }
+    ]
+  },{
+    path:'user',
+    component:FullLayoutComponent,
+    canActivate: [AuthGuard],
+    children:[
+      {
+        path:'profile',
+        component:UserProfileComponent
       }
     ]
   },
