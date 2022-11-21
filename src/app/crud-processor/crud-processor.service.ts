@@ -20,7 +20,7 @@ export class CrudProcessorService {
    * @param domainName 
    */
   public listAll(projectName: string, domainName: string): Observable<any> {
-    return this.httpClient.get(environment.api_url + "apigenerator/" + projectName + "/" + domainName);
+    return this.httpClient.get(environment.api_engine_url + "apiengine/" + projectName + "/" + domainName);
   }
 
   /**
@@ -46,7 +46,7 @@ export class CrudProcessorService {
    * @param domainId 
    */
   public deleteRecord(projectName: string, domainName: string, domainId: string): Observable<any> {
-    return this.httpClient.delete(environment.api_url + "apigenerator/" + projectName + "/" + domainName + "/" + domainId);
+    return this.httpClient.delete(environment.api_engine_url + "apiengine/" + projectName + "/" + domainName + "/" + domainId);
   }
 
   /**

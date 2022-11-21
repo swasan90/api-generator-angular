@@ -34,7 +34,7 @@ export class AddCrudService {
    * @param domainName 
    */
   public persistRecord(formObj:any,projectName:string,domainName:string):Observable<any>{
-    return this.httpClient.post(environment.api_url+"apigenerator/"+projectName+"/"+domainName,formObj);
+    return this.httpClient.post(environment.api_engine_url+"apiengine/"+projectName+"/"+domainName,formObj);
   }
 
   /**
@@ -45,7 +45,7 @@ export class AddCrudService {
    * @param domainId 
    */
   public updateRecord(formObj:any,projectName:string,domainName:string,domainId:string):Observable<any>{
-    return this.httpClient.post(environment.api_url+"apigenerator/"+projectName+"/"+domainName+"/"+domainId,formObj);
+    return this.httpClient.post(environment.api_engine_url+"apiengine/"+projectName+"/"+domainName+"/"+domainId,formObj);
   }
 
 }
