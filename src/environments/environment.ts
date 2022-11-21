@@ -4,10 +4,11 @@
 
 export const environment = {
   production: false,
-  api_url: "http://localhost:8080/",
-  secret_key_uuid:"",
-  redis_url:"http://localhost:8081/",
-  auth_url:"http://localhost:4200/"
+  api_url: "http://localhost:8081/",
+  secret_key_uuid:"sEcrEtkEyuuid",
+  redis_url:"http://localhost:8080/",
+  auth_url:"http://localhost:4200/",
+  api_engine_url:"http://localhost:8082/"
 };
 
 /*
