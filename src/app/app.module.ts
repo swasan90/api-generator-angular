@@ -43,6 +43,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ErrorInterceptor } from './errorHandlers/error.interceptor';
 import { JwtTokenInterceptor } from './jwt-interceptor';
 import { environment } from 'src/environments/environment';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+ 
  
 
 export function tokenGetter() {
@@ -65,7 +67,8 @@ export function tokenGetter() {
     MatCardContentComponent,
     MatCardHeaderComponent,
     LogoutComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
